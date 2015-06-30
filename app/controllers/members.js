@@ -1,4 +1,4 @@
-// I control the main demo.
+// I am le Members Controller
 app.controller(
   "membersCtrl", ['$scope', '$rootScope', '$filter', '$timeout',
     'DMSRestangular', '$state', 'localStorageService', 'MySessionService',
@@ -27,10 +27,37 @@ app.controller(
           'format', 'json');
         // This will query /accounts and return a promise.
         user.customGET('').then(function(userObj) {
-          localStorageService.set('meds_user', userObj);
-          state.go('users');
+          localStorageService.set('dms_user', userObj);
+          state.go('dashboard');
 
         });
+      }
+
+      scope.newmember = function newmember() {
+        member = {
+              "members": {
+                  "name":       scope.memberProfile.name,
+         }
+        };
+        console.log(member);
+        Members.post(member);
+
+      }
+        
+      scope.updateMember = function updateMember() {
+        updatedMember = DMSRestangular.one('members', member.id);
+
+        updatedmember[0] = member;
+        
+        member = {
+              "utf8":"✓",
+              "members": {
+              "id":         member.id,
+              "name":       scope.memberProfile.name
+         }
+        };
+        console.log(member);
+        updatedMember.put(member);
       }
 
       function getMemberCount() {
@@ -51,12 +78,7 @@ app.controller(
 
       }
 
-      scope.updateMember = function updateMember() {
-        member = scope.memberProfile;
-        updatedmember = DMSRestangular.one('memberes', member.id);
-        updatedmember[0] = member;
-        updatedmember.put(member);
-      }
+      
 
     }
   ]

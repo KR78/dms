@@ -1,9 +1,12 @@
-// I control the main demo.
+// I am le Diocese Controller
 app.controller(
   "diocesesCtrl", ['$scope', '$rootScope', '$filter', '$timeout',
     'DMSRestangular', '$state', 'localStorageService', 'MySessionService',
     function(scope, rootScope, filter, timeout, DMSRestangular, state,
       localStorageService, MySessionService) {
+
+      var Dioceses = DMSRestangular.all('dioceses');
+      var diocese = {};
 
       getDioceseCount();
       rootScope.user = MySessionService.getLoggedUser();
@@ -15,7 +18,7 @@ app.controller(
       }
 
       scope.getDioceses = function getDioceses() {
-        var Dioceses = DMSRestangular.all('dioceses');
+        
         // This will query /accounts and return a promise.
         Dioceses.customGET('').then(function(dioceses) {
           //console.log(users);
@@ -31,14 +34,48 @@ app.controller(
           'format', 'json');
         // This will query /accounts and return a promise.
         user.customGET('').then(function(userObj) {
-          localStorageService.set('meds_user', userObj);
+          localStorageService.set('dms_user', userObj);
           state.go('users');
 
         });
       }
 
+      scope.newDiocese = function newdiocese() {
+        diocese = {
+              "diocese": {
+                  "name":       scope.dioceseProfile.name,
+                  "in_charge":  scope.dioceseProfile.in_charge,
+                  "location":   scope.dioceseProfile.location
+         }
+        };
+        console.log(diocese);
+        Dioceses.post(diocese);
+
+      }
+        
+      scope.updateDiocese = function updateDiocese() {
+        updatedDiocese = DMSRestangular.one('dioceses', diocese.id);
+        diocese = {
+              "utf8":"✓",
+              "diocese": {
+              "id":         diocese.id,
+              "name":       scope.dioceseProfile.name,
+              "in_charge":  scope.dioceseProfile.in_charge,
+              "location":   scope.dioceseProfile.location
+         }
+        };
+        console.log(diocese);
+        updatedDiocese.put(diocese);
+      }
+
+       scope.setStatus = function setStatus(status) {
+        scope.status = status;
+        if (status == 'add') {
+          scope.dioceseProfile = [];
+        }
+      }
+
       function getDioceseCount() {
-        var Dioceses = DMSRestangular.all('dioceses');
         // This will query /accounts and return a promise.
         Dioceses.customGET('').then(function(dioceses) {
           // console.log(users);
@@ -48,5 +85,7 @@ app.controller(
         });
       }
     }
+
+
   ]
 );

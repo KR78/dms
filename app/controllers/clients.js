@@ -1,6 +1,6 @@
 // I control the main demo.
 app.controller(
-	"clientsCtrl", ['$scope', '$rootScope', '$filter', '$timeout', 'MedsRestangular', '$state', 'localStorageService', 'MySessionService', function(scope, rootScope, filter, timeout, MedsRestangular, state, localStorageService, MySessionService) {
+	"clientsCtrl", ['$scope', '$rootScope', '$filter', '$timeout', 'DMSRestangular', '$state', 'localStorageService', 'MySessionService', function(scope, rootScope, filter, timeout, DMSRestangular, state, localStorageService, MySessionService) {
 		getClientCount();
 
 		scope.getClient = function getClient(newClient) {
@@ -9,7 +9,7 @@ app.controller(
 		}
 
 		scope.getClients = function getClients() {
-			var AllClients = MedsRestangular.all('clients');
+			var AllClients = DMSRestangular.all('clients');
 			// This will query /accounts and return a promise.
 			AllClients.customGET('').then(function(clients) {
 				//console.log(clients);
@@ -19,7 +19,7 @@ app.controller(
 		}
 
 		function getClientCount() {
-			var AllClients = MedsRestangular.all('clients');
+			var AllClients = DMSRestangular.all('clients');
 			// This will query /accounts and return a promise.
 			AllClients.customGET('').then(function(clients) {
 				// console.log(clients);

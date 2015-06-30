@@ -1,4 +1,4 @@
-// I control the main demo.
+// I am le Services Controller
 app.controller(
   "servicesCtrl", ['$scope', '$rootScope', '$filter', '$timeout',
     'DMSRestangular', '$state', 'localStorageService', 'MySessionService',
@@ -31,11 +31,40 @@ app.controller(
           'format', 'json');
         // This will query /accounts and return a promise.
         user.customGET('').then(function(userObj) {
-          localStorageService.set('meds_user', userObj);
+          localStorageService.set('dms_user', userObj);
           state.go('users');
 
         });
       }
+
+      scope.newService = function newService() {
+        service = {
+              "service": {
+                  "name":       scope.serviceProfile.name,
+                  "in_charge":  scope.serviceProfile.in_charge,
+                  "location":   scope.serviceProfile.location
+         }
+        };
+        console.log(service);
+        services.post(service);
+
+      }
+        
+      scope.updateService = function updateService() {
+        updatedService = DMSRestangular.one('services', service.id);
+        service = {
+              "utf8":"✓",
+              "service": {
+              "id":         service.id,
+              "name":       scope.serviceProfile.name,
+              "in_charge":  scope.serviceProfile.in_charge,
+              "location":   scope.serviceProfile.location
+         }
+        };
+        console.log(service);
+        updatedservice.put(service);
+      }
+
 
       function getServiceCount() {
         // This will query /accounts and return a promise.
@@ -47,16 +76,7 @@ app.controller(
         });
       }
 
-      scope.newService = function newService() {
-        parish = {
-          "name": "St. Lukes",
-          "in_charge": "Pastor Oscar",
-          "location": "Outer Ring Road",
-          "updated_at": "2015-01-01 00:00:00 UTC",
-          "created_at": "2015-01-01 00:00:00 UTC"
-        }
-        Services.post(parish);
-      }
+      
     }
   ]
 );

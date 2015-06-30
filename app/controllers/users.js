@@ -31,11 +31,13 @@ app.controller(
           'format', 'json');
         // This will query /accounts and return a promise.
         user.customGET('').then(function(userObj) {
-          localStorageService.set('meds_user', userObj);
+          localStorageService.set('dms_user', userObj);
           state.go('users');
 
         });
       }
+
+      
 
       function getUserCount() {
         var AllUsers = DMSRestangular.all('users');
