@@ -11,14 +11,14 @@ app.controller(
       scope.getParish = function getParish(newParish) {
         scope.parishProfile = newParish;
         state.go('location.parishes.view');
-      }
+      };
 
       scope.getParishes = function getParishes() {
         Parishes.customGET('').then(function(parishes) {
           scope.rowCollection = parishes;
           scope.displayedCollection = [].concat(scope.rowCollection);
         });
-      }
+      };
 
       scope.login = function login() {
         rootScope.user = [];
@@ -31,7 +31,7 @@ app.controller(
           state.go('users');
 
         });
-      }
+      };
 
       function getParishCount() {
         Parishes.customGET('').then(function(parishes) {
@@ -46,11 +46,8 @@ app.controller(
         if (status == 'add') {
           scope.parishProfile = [];
         }
-      }
+      };
       scope.newParish = function newParish() {
-        parish = scope.parishProfile;
-        console.log(parish);
-        
         parish = {
               "parish": {
                   "name":       scope.parishProfile.name,
@@ -61,7 +58,7 @@ app.controller(
         console.log(parish);
         Parishes.post(parish);
 
-      }
+      };
         
       scope.updateParish = function updateParish() {
         parish = scope.parishProfile;
@@ -77,7 +74,7 @@ app.controller(
         };
         console.log(parish);
         updatedParish.put(parish);
-      }
+      };
 
     }
   ]
