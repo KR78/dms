@@ -14,7 +14,7 @@ run 'npm install' in the root directory of the project to create the node_module
 ~~~
 **Run the app**
 ~~~javascript
-run 'grunt serve' task in the root directory of the project to run the app on http://localhost:9000
+run 'grunt serve' task in the root directory of the project to run the app on 'http://localhost:9000'
 ~~~
 **Working with the following:**
 ~~~
