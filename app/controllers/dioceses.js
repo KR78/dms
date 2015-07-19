@@ -41,6 +41,7 @@ app.controller(
       }
 
       scope.newDiocese = function newdiocese() {
+        
         diocese = {
               "diocese": {
                   "name":       scope.dioceseProfile.name,
@@ -54,18 +55,17 @@ app.controller(
       }
         
       scope.updateDiocese = function updateDiocese() {
-        updatedDiocese = DMSRestangular.one('dioceses', diocese.id);
+        updatedDiocese = DMSRestangular.one('dioceses', scope.dioceseProfile.id);
         diocese = {
-              "utf8":"✓",
               "diocese": {
-              "id":         diocese.id,
+              "id":         scope.dioceseProfile.id,
               "name":       scope.dioceseProfile.name,
               "in_charge":  scope.dioceseProfile.in_charge,
               "location":   scope.dioceseProfile.location
          }
         };
         console.log(diocese);
-        updatedDiocese.put(diocese);
+        updatedDiocese.customPUT(diocese);
       }
 
        scope.setStatus = function setStatus(status) {

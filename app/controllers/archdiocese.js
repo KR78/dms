@@ -46,6 +46,7 @@ app.controller(
       }
 
       scope.newArchdiocese = function newArchdiocese() {
+        
         var archdiocese = {
               "archdiocese": {
                   "name":       scope.archdioceseProfile.name,
@@ -56,17 +57,16 @@ app.controller(
 
       }
 
-      scope.updateParish = function updateParish() {
-        updatedArchdiocese = DMSRestangular.one('archdioceses', archdiocese.id);
+      scope.updateArchdiocese = function updateArchdiocese() {
+        updatedArchdiocese = DMSRestangular.one('archdioceses', scope.archdioceseProfile.id);
         var archdiocese = {
-              "utf8":"✓",
               "archdiocese": {
-              "id":         archdiocese.id,
+              "id":         scope.archdioceseProfile.id,
               "name":       scope.archdioceseProfile.name,
          }
         };
         console.log(archdiocese);
-        updatedArchdiocese.put(archdiocese);
+        updatedArchdiocese.customPUT(archdiocese);
       }
 
 

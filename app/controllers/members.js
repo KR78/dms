@@ -45,19 +45,16 @@ app.controller(
       }
         
       scope.updateMember = function updateMember() {
-        updatedMember = DMSRestangular.one('members', member.id);
-
-        updatedmember[0] = member;
+        updatedMember = DMSRestangular.one('members', scope.memberProfile.id);
         
         member = {
-              "utf8":"✓",
               "members": {
-              "id":         member.id,
+              "id":         scope.memberProfile.id,
               "name":       scope.memberProfile.name
          }
         };
         console.log(member);
-        updatedMember.put(member);
+        updatedMember.customPUT(member);
       }
 
       function getMemberCount() {

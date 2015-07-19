@@ -61,18 +61,25 @@ app.controller(
       }
         
       scope.updateParish = function updateParish() {
-        updatedParish = DMSRestangular.one('parishes', parish.id);
+        updatedParish = DMSRestangular.one('parishes', scope.parishProfile.id);
+
+        today = new Date();
+        year = today.getFullYear();
+        month = today.getMonth() + 1;
+        day = today.getDay();
+        // this.updated_at = year + '-' + month + '-' + day;
+        var now = year + '-' + month + '-' + day;
+        
         parish = {
-              "utf8":"✓",
               "parish": {
-              "id":         parish.id,
+              "id":         scope.parishProfile.id,
               "name":       scope.parishProfile.name,
               "in_charge":  scope.parishProfile.in_charge,
               "location":   scope.parishProfile.location
-         }
+              }
         };
-        console.log(parish);
-        updatedParish.put(parish);
+        updatedParish.customPUT(parish);
+        console.log(scope.parishProfile.id);
       }
 
     }

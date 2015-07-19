@@ -170,6 +170,7 @@ app.controller(
       }
 
       scope.newArchdiocese = function newArchdiocese() {
+        
         var archdiocese = {
               "archdiocese": {
                   "name":       scope.archdioceseProfile.name,
@@ -180,17 +181,16 @@ app.controller(
 
       }
 
-      scope.updateParish = function updateParish() {
-        updatedArchdiocese = DMSRestangular.one('archdioceses', archdiocese.id);
+      scope.updateArchdiocese = function updateArchdiocese() {
+        updatedArchdiocese = DMSRestangular.one('archdioceses', scope.archdioceseProfile.id);
         var archdiocese = {
-              "utf8":"✓",
               "archdiocese": {
-              "id":         archdiocese.id,
+              "id":         scope.archdioceseProfile.id,
               "name":       scope.archdioceseProfile.name,
          }
         };
         console.log(archdiocese);
-        updatedArchdiocese.put(archdiocese);
+        updatedArchdiocese.customPUT(archdiocese);
       }
 
 
@@ -369,6 +369,7 @@ app.controller(
       }
 
       scope.newDeanery = function newdeanery() {
+        
         deanery = {
               "deanery": {
                   "name":       scope.deaneryProfile.name,
@@ -382,18 +383,17 @@ app.controller(
       }
         
       scope.updateDeanery = function updateDeanery() {
-        updateddeanery = DMSRestangular.one('deaneries', deanery.id);
+        updatedDeanery = DMSRestangular.one('deaneries', scope.deaneryProfile.id);
         deanery = {
-              "utf8":"✓",
               "deanery": {
-              "id":         deanery.id,
+              "id":         scope.deaneryProfile.id,
               "name":       scope.deaneryProfile.name,
               "in_charge":  scope.deaneryProfile.in_charge,
               "location":   scope.deaneryProfile.location
          }
         };
         console.log(deanery);
-        updatedDeanery.put(deanery);
+        updatedDeanery.customPUT(deanery);
       }
 
       function getDeaneryCount() {
@@ -452,6 +452,7 @@ app.controller(
       }
 
       scope.newDiocese = function newdiocese() {
+        
         diocese = {
               "diocese": {
                   "name":       scope.dioceseProfile.name,
@@ -465,18 +466,17 @@ app.controller(
       }
         
       scope.updateDiocese = function updateDiocese() {
-        updatedDiocese = DMSRestangular.one('dioceses', diocese.id);
+        updatedDiocese = DMSRestangular.one('dioceses', scope.dioceseProfile.id);
         diocese = {
-              "utf8":"✓",
               "diocese": {
-              "id":         diocese.id,
+              "id":         scope.dioceseProfile.id,
               "name":       scope.dioceseProfile.name,
               "in_charge":  scope.dioceseProfile.in_charge,
               "location":   scope.dioceseProfile.location
          }
         };
         console.log(diocese);
-        updatedDiocese.put(diocese);
+        updatedDiocese.customPUT(diocese);
       }
 
        scope.setStatus = function setStatus(status) {
@@ -567,19 +567,16 @@ app.controller(
       }
         
       scope.updateMember = function updateMember() {
-        updatedMember = DMSRestangular.one('members', member.id);
-
-        updatedmember[0] = member;
+        updatedMember = DMSRestangular.one('members', scope.memberProfile.id);
         
         member = {
-              "utf8":"✓",
               "members": {
-              "id":         member.id,
+              "id":         scope.memberProfile.id,
               "name":       scope.memberProfile.name
          }
         };
         console.log(member);
-        updatedMember.put(member);
+        updatedMember.customPUT(member);
       }
 
       function getMemberCount() {
@@ -690,18 +687,25 @@ app.controller(
       }
         
       scope.updateParish = function updateParish() {
-        updatedParish = DMSRestangular.one('parishes', parish.id);
+        updatedParish = DMSRestangular.one('parishes', scope.parishProfile.id);
+
+        today = new Date();
+        year = today.getFullYear();
+        month = today.getMonth() + 1;
+        day = today.getDay();
+        // this.updated_at = year + '-' + month + '-' + day;
+        var now = year + '-' + month + '-' + day;
+        
         parish = {
-              "utf8":"✓",
               "parish": {
-              "id":         parish.id,
+              "id":         scope.parishProfile.id,
               "name":       scope.parishProfile.name,
               "in_charge":  scope.parishProfile.in_charge,
               "location":   scope.parishProfile.location
-         }
+              }
         };
-        console.log(parish);
-        updatedParish.put(parish);
+        updatedParish.customPUT(parish);
+        console.log(scope.parishProfile.id);
       }
 
     }

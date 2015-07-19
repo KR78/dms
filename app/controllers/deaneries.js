@@ -47,6 +47,7 @@ app.controller(
       }
 
       scope.newDeanery = function newdeanery() {
+        
         deanery = {
               "deanery": {
                   "name":       scope.deaneryProfile.name,
@@ -60,18 +61,17 @@ app.controller(
       }
         
       scope.updateDeanery = function updateDeanery() {
-        updateddeanery = DMSRestangular.one('deaneries', deanery.id);
+        updatedDeanery = DMSRestangular.one('deaneries', scope.deaneryProfile.id);
         deanery = {
-              "utf8":"✓",
               "deanery": {
-              "id":         deanery.id,
+              "id":         scope.deaneryProfile.id,
               "name":       scope.deaneryProfile.name,
               "in_charge":  scope.deaneryProfile.in_charge,
               "location":   scope.deaneryProfile.location
          }
         };
         console.log(deanery);
-        updatedDeanery.put(deanery);
+        updatedDeanery.customPUT(deanery);
       }
 
       function getDeaneryCount() {
