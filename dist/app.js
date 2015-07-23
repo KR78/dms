@@ -1,4 +1,4 @@
-var app = angular.module("dms", ['ui.router','restangular','smart-table','textAngular','angularMoment','LocalStorageModule','slick', 'highcharts-ng', 'chart.js', 'ngAnimate', 'toastr', 'ng-token-auth', 'ngStorage', 'ngMaterial', 'leaflet-directive']);
+var app = angular.module("dms", ['ui.router','restangular','smart-table','textAngular','angularMoment','LocalStorageModule','slick', 'highcharts-ng', 'chart.js', 'ngAnimate', 'toastr', 'ng-token-auth', 'ngStorage', 'ngMaterial', 'leaflet-directive', 'angular-loading-bar']);
 
 app.factory('DMSRestangular', function(Restangular) {
     return Restangular.withConfig(function(RestangularConfigurer) {
@@ -435,14 +435,14 @@ app.controller(
       },
       layers: {
         baselayers: {
-          mapbox_outdoors: {
-            name: 'DMS Maps',
-            url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
-            type: 'xyz',
-            layerOptions: {
-              apikey: 'pk.eyJ1IjoidmljNzgiLCJhIjoiZjQ0MDNlMTVmYmNiYTFjY2Y2Mjk3ZTZmY2E0MDVhMTYifQ.qEquG4p4KKO2NY4ULPd7Lw',
-              mapid: 'vic78.f679a5b4'
-            }
+           mapbox_dark: {
+             name: 'Mapbox Dark',
+             url: 'http:api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
+             type: 'xyz',
+             layerOptions: {
+               apikey: 'pk.eyJ1IjoicnVmdXNtYnVndWEiLCJhIjoibnlSalk2WSJ9._hvU3-KdDhkYcPQ1nGTEfQ',
+               mapid: 'bufanuvols.lia22g09'
+             }
           }
         }
       }
@@ -461,12 +461,12 @@ app.controller(
       
      scope.handleLoginBtnClick = function() {
           auth.submitLogin(scope.loginForm)
-            .then(function(resp) { 
-              // handle success response
+            .then(function(response) { 
+              toastr.info(response.status, 'Wow');
             })
-            .catch(function(resp) { 
-              // handle error response
-            console.log(resp.errors); //log any errors 
+            .catch(function(response) { 
+              toastr.info(response.status, 'Wow');
+            console.log(response.errors); //log any errors 
             });
         };
     
@@ -619,20 +619,30 @@ app.controller(
 
       };
         
-      scope.updateParish = function updateParish() {
-        parish = scope.parishProfile;
-        updatedParish = DMSRestangular.one('parishes', parish.id);
+        scope.updateParish = function updateParish() {
+        updatedParish = DMSRestangular.one('parishes', scope.parishProfile.id);
+
+        today = new Date();
+        year = today.getFullYear();
+        month = today.getMonth() + 1;
+        day = today.getDay();
+        // this.updated_at = year + '-' + month + '-' + day;
+        var now = year + '-' + month + '-' + day;
+        
         parish = {
-              "utf8":"✓",
               "parish": {
-              "id":         parish.id,
+              "id":         scope.parishProfile.id,
               "name":       scope.parishProfile.name,
               "in_charge":  scope.parishProfile.in_charge,
               "location":   scope.parishProfile.location
-         }
+              }
         };
-        console.log(parish);
-        updatedParish.put(parish);
+        updatedParish.customPUT(parish).then(function(){
+        toastr.info('Update Successful', 'Awesome!'); 
+        }, function(response) {
+        toastr.danger('Update was not successfyl', 'Wow!'); 
+        });
+        console.log(scope.parishProfile.id);
       };
 
     }
@@ -1386,214 +1396,86 @@ angular.module("../app/partials/front-end/index.html", []).run(["$templateCache"
     "  <link rel=\"stylesheet\" type=\"text/css\" href=\"libs/semantic-ui/dist/components/transition.css\">\n" +
     "\n" +
     "  <style type=\"text/css\">\n" +
-    "\n" +
-    "    .hidden.menu {\n" +
-    "      display: none;\n" +
-    "    }\n" +
-    "\n" +
-    "    .masthead.segment {\n" +
-    "      min-height: 700px;\n" +
-    "      padding: 1em 0em;\n" +
-    "    }\n" +
-    "    .masthead .logo.item img {\n" +
-    "      margin-right: 1em;\n" +
-    "    }\n" +
-    "    .masthead .ui.menu .ui.button {\n" +
-    "      margin-left: 0.5em;\n" +
-    "    }\n" +
-    "    .masthead h1.ui.header {\n" +
-    "      margin-top: 3em;\n" +
-    "      margin-bottom: 0em;\n" +
-    "      font-size: 4em;\n" +
-    "      font-weight: normal;\n" +
-    "    }\n" +
-    "    .masthead h2 {\n" +
-    "      font-size: 1.7em;\n" +
-    "      font-weight: normal;\n" +
-    "    }\n" +
-    "\n" +
-    "    .ui.vertical.stripe {\n" +
-    "      padding: 8em 0em;\n" +
-    "    }\n" +
-    "    .ui.vertical.stripe h3 {\n" +
-    "      font-size: 2em;\n" +
-    "    }\n" +
-    "    .ui.vertical.stripe .button + h3,\n" +
-    "    .ui.vertical.stripe p + h3 {\n" +
-    "      margin-top: 3em;\n" +
-    "    }\n" +
-    "    .ui.vertical.stripe .floated.image {\n" +
-    "      clear: both;\n" +
-    "    }\n" +
-    "    .ui.vertical.stripe p {\n" +
-    "      font-size: 1.33em;\n" +
-    "    }\n" +
-    "    .ui.vertical.stripe .horizontal.divider {\n" +
-    "      margin: 3em 0em;\n" +
-    "    }\n" +
-    "\n" +
-    "    .quote.stripe.segment {\n" +
-    "      padding: 0em;\n" +
-    "    }\n" +
-    "    .quote.stripe.segment .grid .column {\n" +
-    "      padding-top: 5em;\n" +
-    "      padding-bottom: 5em;\n" +
-    "    }\n" +
-    "\n" +
-    "    .footer.segment {\n" +
-    "      padding: 5em 0em;\n" +
-    "    }\n" +
-    "\n" +
-    "    .secondary.pointing.menu .toc.item {\n" +
-    "      display: none;\n" +
-    "    }\n" +
-    "\n" +
-    "    @media only screen and (max-width: 700px) {\n" +
-    "      .ui.fixed.menu {\n" +
-    "        display: none !important;\n" +
-    "      }\n" +
-    "      .secondary.pointing.menu .item,\n" +
-    "      .secondary.pointing.menu .menu {\n" +
-    "        display: none;\n" +
-    "      }\n" +
-    "      .secondary.pointing.menu .toc.item {\n" +
-    "        display: block;\n" +
-    "      }\n" +
-    "      .masthead.segment {\n" +
-    "        min-height: 350px;\n" +
-    "      }\n" +
-    "      .masthead h1.ui.header {\n" +
-    "        font-size: 2em;\n" +
-    "        margin-top: 1.5em;\n" +
-    "      }\n" +
-    "      .masthead h2 {\n" +
-    "        margin-top: 0.5em;\n" +
-    "        font-size: 1.5em;\n" +
-    "      }\n" +
-    "    }\n" +
-    "\n" +
-    "\n" +
+    "  body {\n" +
+    "    background-color: #FFFFFF;\n" +
+    "  }\n" +
+    "  .ui.menu .item img.logo {\n" +
+    "    margin-right: 1.5em;\n" +
+    "  }\n" +
+    "  #main {\n" +
+    "    margin-top: 40px;\n" +
+    "  }\n" +
+    "  .wireframe {\n" +
+    "    margin-top: 2em;\n" +
+    "  }\n" +
+    "  .ui.footer.segment {\n" +
+    "    margin: 5em 0em 0em;\n" +
+    "    padding: 5em 0em;\n" +
+    "  }\n" +
     "  </style>\n" +
     "\n" +
-    "\n" +
-    "  <script src=\"libs/semantic-ui/dist/components/visibility.js\"></script>\n" +
-    "  <script src=\"libs/semantic-ui/dist/components/sidebar.js\"></script>\n" +
-    "  <script src=\"libs/semantic-ui/dist/components/transition.js\"></script>\n" +
-    "  <script>\n" +
-    "  $(document)\n" +
-    "    .ready(function() {\n" +
-    "\n" +
-    "      // fix menu when passed\n" +
-    "      $('.masthead')\n" +
-    "        .visibility({\n" +
-    "          once: false,\n" +
-    "          onBottomPassed: function() {\n" +
-    "            $('.fixed.menu').transition('fade in');\n" +
-    "          },\n" +
-    "          onBottomPassedReverse: function() {\n" +
-    "            $('.fixed.menu').transition('fade out');\n" +
-    "          }\n" +
-    "        })\n" +
-    "      ;\n" +
-    "\n" +
-    "      // create sidebar and attach to menu open\n" +
-    "      $('.ui.sidebar')\n" +
-    "        .sidebar('attach events', '.toc.item')\n" +
-    "      ;\n" +
-    "\n" +
-    "    })\n" +
-    "  ;\n" +
-    "  </script>\n" +
     "</head>\n" +
     "<body>\n" +
     "\n" +
-    "<!-- Following Menu -->\n" +
-    "<div class=\"ui inverted large top fixed hidden menu\">\n" +
-    "  <div class=\"ui container\">\n" +
-    "    <a class=\"active item\">Home</a>\n" +
-    "    <a class=\"item\">Register</a>\n" +
-    "    <a class=\"item\">About</a>\n" +
-    "    <div class=\"right menu\">\n" +
-    "      <div class=\"item\">\n" +
-    "        <a class=\"ui primary button\">Log in</a>\n" +
+    "  <div class=\"ui fixed inverted menu\">\n" +
+    "    <div class=\"ui container\">\n" +
+    "      <div href=\"#\" class=\"header item\">\n" +
+    "        <!--<img class=\"logo\" src=\"\">-->\n" +
+    "        Diocese Management System\n" +
     "      </div>\n" +
-    "      <div class=\"item\">\n" +
-    "        <a class=\"ui primary button\">Sign Up</a>\n" +
-    "      </div>\n" +
+    "      <a ui-sref=\"/\" class=\"item\">Home</a>\n" +
+    "      <a href=\"#\" class=\"item\">Log In</a>\n" +
+    "      <a href=\"#\" class=\"item\">Sign Up</a>\n" +
+    "\n" +
     "    </div>\n" +
     "  </div>\n" +
-    "</div>\n" +
     "\n" +
+    "<leaflet id=\"main\" defaults=\"defaults\" center=\"nairobi\" height=\"580px\" width=\"1353px\"></leaflet>\n" +
     "\n" +
-    "\n" +
-    "<!-- Page Contents -->\n" +
-    "<div class=\"pusher\">\n" +
-    "\n" +
-    "  <div class=\"ui inverted vertical masthead center aligned segment\">\n" +
-    "    <div class=\"ui container\">\n" +
-    "      <div class=\"ui large secondary inverted pointing menu\">\n" +
-    "        <a class=\"toc item\">\n" +
-    "          <i class=\"sidebar icon\"></i>\n" +
-    "        </a>\n" +
-    "        <a class=\"active item\">Home</a>\n" +
-    "        <a class=\"item\">Register</a>\n" +
-    "        <a class=\"item\">About</a>\n" +
-    "        <div class=\"right item\">\n" +
-    "          <a class=\"ui inverted button\">Log in</a>\n" +
-    "          <a class=\"ui inverted button\">Sign Up</a>\n" +
-    "        </div>\n" +
-    "      </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "<!-- Leaflet -->\n" +
-    "    \n" +
-    "    <div class=\"ui container\">\n" +
-    "    <leaflet center=\"center\"></leaflet>\n" +
-    "    </div>\n" +
-    "\n" +
-    "<!-- /Leaflet -->\n" +
-    "\n" +
-    "    <div class=\"ui text container\">\n" +
-    "      <div class=\"ui huge primary button\">Register <i class=\"right arrow icon\"></i></div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "  </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "<!-- Footer -->\n" +
-    "  <div class=\"ui inverted vertical footer segment\">\n" +
-    "    <div class=\"ui container\">\n" +
-    "      <div class=\"ui stackable inverted divided equal height stackable grid\">\n" +
+    "  <div class=\"ui orange inverted vertical footer segment\" style=\"backgroud-color: #743232;\">\n" +
+    "    <div class=\"ui center aligned container\">\n" +
+    "      <div class=\"ui stackable inverted divided grid\">\n" +
     "        <div class=\"three wide column\">\n" +
-    "          <h4 class=\"ui inverted header\">About</h4>\n" +
+    "          <h4 class=\"ui inverted header\">Lorem ipsum</h4>\n" +
     "          <div class=\"ui inverted link list\">\n" +
-    "            <a href=\"#\" class=\"item\">Sitemap</a>\n" +
-    "            <a href=\"#\" class=\"item\">Contact Us</a>\n" +
-    "            <a href=\"#\" class=\"item\">Religious Ceremonies</a>\n" +
-    "            <a href=\"#\" class=\"item\">Events</a>\n" +
+    "            <a href=\"#\" class=\"item\">Link One</a>\n" +
+    "            <a href=\"#\" class=\"item\">Link Two</a>\n" +
+    "            <a href=\"#\" class=\"item\">Link Three</a>\n" +
+    "            <a href=\"#\" class=\"item\">Link Four</a>\n" +
     "          </div>\n" +
     "        </div>\n" +
     "        <div class=\"three wide column\">\n" +
-    "          <h4 class=\"ui inverted header\">Services</h4>\n" +
+    "          <h4 class=\"ui inverted header\">Ipsum Adipisicing </h4>\n" +
     "          <div class=\"ui inverted link list\">\n" +
-    "            <a href=\"#\" class=\"item\">Adoption</a>\n" +
-    "            <a href=\"#\" class=\"item\">FAQ</a>\n" +
-    "            <a href=\"#\" class=\"item\">How To Access</a>\n" +
+    "            <a href=\"#\" class=\"item\">Link One</a>\n" +
+    "            <a href=\"#\" class=\"item\">Link Two</a>\n" +
+    "            <a href=\"#\" class=\"item\">Link Three</a>\n" +
+    "            <a href=\"#\" class=\"item\">Link Four</a>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "        <div class=\"three wide column\">\n" +
+    "          <h4 class=\"ui inverted header\">Incididunt veli</h4>\n" +
+    "          <div class=\"ui inverted link list\">\n" +
+    "            <a href=\"#\" class=\"item\">Link One</a>\n" +
+    "            <a href=\"#\" class=\"item\">Link Two</a>\n" +
+    "            <a href=\"#\" class=\"item\">Link Three</a>\n" +
+    "            <a href=\"#\" class=\"item\">Link Four</a>\n" +
     "          </div>\n" +
     "        </div>\n" +
     "        <div class=\"seven wide column\">\n" +
-    "          <h4 class=\"ui inverted header\">[CPanel]</h4>\n" +
-    "          <a ui-sref=\"login\">Admin</a>\n" +
+    "          <h4 class=\"ui inverted header\">Lorem ipsum Ea nostrud Ut.</h4>\n" +
+    "          <p>Lorem ipsum Esse in dolore do irure enim anim reprehenderit sed veniam occaecat occaecat est quis.</p>\n" +
     "        </div>\n" +
+    "      </div>\n" +
+    "      <div class=\"ui inverted section divider\"></div>\n" +
+    "      <div class=\"ui horizontal inverted small divided link list\">\n" +
+    "        <a class=\"item\" ui-sref=\"login\">C Panel</a>\n" +
+    "        <a class=\"item\" href=\"#\">Contact Us</a>\n" +
+    "        <a class=\"item\" href=\"#\">Terms and Conditions</a>\n" +
+    "        <a class=\"item\" href=\"#\">Privacy Policy</a>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
-    "<!-- /Footer -->\n" +
-    "\n" +
-    "</div>\n" +
-    "\n" +
-    "\n" +
     "");
 }]);
 
@@ -1888,8 +1770,7 @@ angular.module("../app/partials/location/archdioceses.index.html", []).run(["$te
 
 angular.module("../app/partials/location/archdioceses.list.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("../app/partials/location/archdioceses.list.html",
-    "<!-- Parishes' List -->\n" +
-    "<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>\n" +
+    "<!-- Archdioceses' List -->\n" +
     "<style>\n" +
     "  .filterable {\n" +
     "    margin-top: 15px;\n" +
@@ -1914,60 +1795,45 @@ angular.module("../app/partials/location/archdioceses.list.html", []).run(["$tem
     ".filterable .filters input[disabled]:-ms-input-placeholder {\n" +
     "    color: #333;\n" +
     "}\n" +
-    "th{\n" +
-    "  font-family: 'Roboto', sans-serif;\n" +
+    "#dms{\n" +
+    "  background-color: #FFFFFF;\n" +
     "}\n" +
     "</style>\n" +
-    "\n" +
-    "<div class=\"container \">\n" +
-    "    <div class=\"row\">\n" +
-    "    <div class=\"col-xs-10 col-md-11 col-lg-9\">\n" +
     "        <div class=\"panel panel-primary filterable\">\n" +
-    "            <div class=\"panel-heading\">\n" +
-    "                <h3 class=\"panel-title\">Archdioceses</h3>\n" +
-    "                <div class=\"pull-right\">\n" +
-    "                    <button class=\"btn btn-default btn-xs btn-filter\"><i class=\"search icon\"></i> Filter</button>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <table class=\"table\" st-safe-src=\"rowCollection\" st-table=\"displayedCollection\">\n" +
-    "                <thead>\n" +
-    "                    <tr class=\"filters\">\n" +
-    "       <th><input type=\"text\" st-search=\"'id'\" class=\"form-control th\" placeholder=\"#\" disabled ></th>\n" +
-    "       <th><input type=\"text\" st-search=\"'updated_at'\" class=\"form-control th\" placeholder=\"Updated At\" disabled ></th>\n" +
-    "       <th><input type=\"text\" st-search=\"'created_at'\" class=\"form-control th\" placeholder=\"Created At\" disabled ></th>\n" +
-    "                    </tr>\n" +
-    "                </thead>\n" +
-    "                <tbody>\n" +
-    "\n" +
-    "              <tr ng-repeat=\"row in displayedCollection\"  st-select-row=\"row\" style=\"font-family: 'Roboto', sans-serif;\">\n" +
+    "<table class=\"ui inverted blue table\" st-safe-src=\"rowCollection\" st-table=\"displayedCollection\">\n" +
+    "  <thead>\n" +
+    "    <tr class=\"ui form filters\" colspan=\"3\">\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'id'\" class=\"form-control th\" placeholder=\"#\" disabled ></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'updated_at'\" class=\"form-control th\" placeholder=\"Updated At\" disabled ></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'created_at'\" class=\"form-control th\" placeholder=\"Created At\" disabled ></th>\n" +
+    "       <th id=\"dms\" width=\"100\">\n" +
+    "    <button class=\"ui icon button btn-filter\">\n" +
+    "  <i class=\"search icon\"></i>\n" +
+    "    </button>\n" +
+    "  </tr></thead><tbody>\n" +
+    "    <tr ng-repeat=\"row in displayedCollection\"  st-select-row=\"row\">\n" +
     "                  <td>{{row.id}}</td>\n" +
     "                  <td>{{row.updated_at}}</td>\n" +
     "                  <td>{{row.created_at}}</td>\n" +
-    "                  <td width=\"110\">\n" +
-    "                    <button type=\"button\" ng-click=\"getArchdiocese(row)\" class=\"ui blue tiny button icon\">\n" +
-    "                      <i class=\"icon ion-more\">\n" +
-    "                      </i>\n" +
-    "                    </button>\n" +
-    "                    <button type=\"button\" ng-click=\"\" class=\"ui red tiny button icon\">\n" +
-    "                      <i class=\"icon ion-minus-circled\">\n" +
-    "                      </i>\n" +
-    "                    </button>\n" +
-    "\n" +
-    "                  </td>\n" +
-    "                </tr>\n" +
-    "                </tbody>\n" +
-    "                  <tfoot>\n" +
-    "    <tr>\n" +
-    "      <th colspan=\"1\">{{records}} Records</th>\n" +
-    "      <th colspan=\"5\" style=\"cursor: pointer;\">\n" +
-    "        <div st-pagination=\"\" st-items-by-page=\"recordsPerPage\" st-displayed-pages=\"pages\"></div>\n" +
-    "      </th>\n" +
+    "                                    <td width=\"100\">\n" +
+    "       <div class=\"ui buttons\">\n" +
+    "       <div data-content=\"Edit Parish Row\">\n" +
+    "              <button class=\"ui button\" ng-click=\"getParish(row)\">Edit</button>\n" +
+    "       </div>\n" +
+    "              <div class=\"or\"></div>\n" +
+    "       <div data-content=\"Delete Parish Row\">\n" +
+    "              <button class=\"ui negative button\" ng-click=\"\">Delete</button>\n" +
+    "       </div>\n" +
+    "      </div>\n" +
     "    </tr>\n" +
-    "  </tfoot>\n" +
-    "            </table>\n" +
+    "    <tr>\n" +
+    "<th colspan=\"1\">{{records}} Records</th>\n" +
+    "      <th colspan=\"6\" style=\"cursor: pointer;\">\n" +
+    "        <div st-pagination=\"\" st-items-by-page=\"recordsPerPage\" st-displayed-pages=\"pages\">\n" +
     "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
+    "    </tr>\n" +
+    "  </tbody>\n" +
+    "</table>\n" +
     "</div>\n" +
     "<script>\n" +
     "$(document).ready(function(){\n" +
@@ -2585,18 +2451,48 @@ angular.module("../app/partials/location/parishes.index.html", []).run(["$templa
 angular.module("../app/partials/location/parishes.list.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("../app/partials/location/parishes.list.html",
     "<!-- Parishes' List -->\n" +
-    "\n" +
+    "<style>\n" +
+    "  .filterable {\n" +
+    "    margin-top: 15px;\n" +
+    "}\n" +
+    ".filterable .panel-heading .pull-right {\n" +
+    "    margin-top: -20px;\n" +
+    "}\n" +
+    ".filterable .filters input[disabled] {\n" +
+    "    background-color: transparent;\n" +
+    "    border: none;\n" +
+    "    cursor: auto;\n" +
+    "    box-shadow: none;\n" +
+    "    padding: 0;\n" +
+    "    height: auto;\n" +
+    "}\n" +
+    ".filterable .filters input[disabled]::-webkit-input-placeholder {\n" +
+    "    color: #333;\n" +
+    "}\n" +
+    ".filterable .filters input[disabled]::-moz-placeholder {\n" +
+    "    color: #333;\n" +
+    "}\n" +
+    ".filterable .filters input[disabled]:-ms-input-placeholder {\n" +
+    "    color: #333;\n" +
+    "}\n" +
+    "#dms{\n" +
+    "  background-color: #FFFFFF;\n" +
+    "}\n" +
+    "</style>\n" +
+    "        <div class=\"panel panel-primary filterable\">\n" +
     "<table class=\"ui inverted blue table\" st-safe-src=\"rowCollection\" st-table=\"displayedCollection\">\n" +
     "  <thead>\n" +
-    "    <tr class=\"ui form\">\n" +
-    "    <div class=\"fields\">\n" +
-    "       <th><input type=\"text\" st-search=\"'id'\" placeholder=\"#\"  ></th>\n" +
-    "       <th><input type=\"text\" st-search=\"'name'\" placeholder=\"Name\"  ></th>\n" +
-    "       <th><input type=\"text\" st-search=\"'location'\" placeholder=\"Location\"  ></th>\n" +
-    "       <th><input type=\"text\" st-search=\"'in_charge'\" placeholder=\"In Charge\"  ></th>\n" +
-    "       <th><input type=\"text\" st-search=\"'updated_at'\" placeholder=\"Updated At\"  ></th>\n" +
-    "       <th><input type=\"text\" st-search=\"'created_at'\" placeholder=\"Created At\"  ></th>\n" +
-    "    </div>\n" +
+    "    <tr class=\"ui form filters\" colspan=\"6\">\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'id'\" placeholder=\"#\"  disabled=\"\"></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'name'\" placeholder=\"Name\"  disabled=\"\"></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'location'\" placeholder=\"Location\"  disabled=\"\"></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'in_charge'\" placeholder=\"In Charge\"  disabled=\"\"></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'updated_at'\" placeholder=\"Updated At\"  disabled=\"\"></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'created_at'\" placeholder=\"Created At\"  disabled=\"\"></th>\n" +
+    "       <th id=\"dms\" width=\"100\">\n" +
+    "    <button class=\"ui icon button btn-filter\">\n" +
+    "  <i class=\"search icon\"></i>\n" +
+    "    </button>\n" +
     "  </tr></thead><tbody>\n" +
     "    <tr ng-repeat=\"row in displayedCollection\"  st-select-row=\"row\">\n" +
     "                  <td>{{row.id}}</td>\n" +
@@ -2608,11 +2504,11 @@ angular.module("../app/partials/location/parishes.list.html", []).run(["$templat
     "                                    <td width=\"100\">\n" +
     "       <div class=\"ui buttons\">\n" +
     "       <div data-content=\"Edit Parish Row\">\n" +
-    "              <button class=\"ui postive button\">Edit</button>\n" +
+    "              <button class=\"ui button\" ng-click=\"getParish(row)\">Edit</button>\n" +
     "       </div>\n" +
     "              <div class=\"or\"></div>\n" +
     "       <div data-content=\"Delete Parish Row\">\n" +
-    "              <button class=\"ui negative button\">Delete</button>\n" +
+    "              <button class=\"ui negative button\" ng-click=\"\">Delete</button>\n" +
     "       </div>\n" +
     "      </div>\n" +
     "    </tr>\n" +
@@ -2624,7 +2520,7 @@ angular.module("../app/partials/location/parishes.list.html", []).run(["$templat
     "    </tr>\n" +
     "  </tbody>\n" +
     "</table>\n" +
-    "\n" +
+    "</div>\n" +
     "<script>\n" +
     "$(document).ready(function(){\n" +
     "    $('.filterable .btn-filter').click(function(){\n" +
@@ -2779,8 +2675,7 @@ angular.module("../app/partials/location/services.index.html", []).run(["$templa
 
 angular.module("../app/partials/location/services.list.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("../app/partials/location/services.list.html",
-    "<!-- Parishes' List -->\n" +
-    "<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>\n" +
+    "<!-- Services' List -->\n" +
     "<style>\n" +
     "  .filterable {\n" +
     "    margin-top: 15px;\n" +
@@ -2805,34 +2700,28 @@ angular.module("../app/partials/location/services.list.html", []).run(["$templat
     ".filterable .filters input[disabled]:-ms-input-placeholder {\n" +
     "    color: #333;\n" +
     "}\n" +
-    "th{\n" +
-    "  font-family: 'Roboto', sans-serif;\n" +
+    "#dms{\n" +
+    "  background-color: #FFFFFF;\n" +
     "}\n" +
     "</style>\n" +
-    "    <div class=\"row\">\n" +
     "        <div class=\"panel panel-primary filterable\">\n" +
-    "            <div class=\"panel-heading\">\n" +
-    "                <h3 class=\"panel-title\">Services</h3>\n" +
-    "                <div class=\"pull-right\">\n" +
-    "                    <button class=\"btn btn-default btn-xs btn-filter\"><i class=\"search icon\"></i> Filter</button>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <table class=\"table\" st-safe-src=\"rowCollection\" st-table=\"displayedCollection\" >\n" +
-    "                <thead>\n" +
-    "                    <tr class=\"filters\" width=\"100\">\n" +
-    "       <th><input type=\"text\" st-search=\"'id'\" class=\"form-control th\" placeholder=\"#\" disabled ></th>\n" +
-    "       <th><input type=\"text\" st-search=\"'name'\" class=\"form-control th\" placeholder=\"Name\" disabled ></th>\n" +
-    "       <th><input type=\"text\" st-search=\"'content'\" class=\"form-control th\" placeholder=\"Content\" disabled ></th>\n" +
-    "       <th><input type=\"text\" st-search=\"'tags'\" class=\"form-control th\" placeholder=\"Tags\" disabled ></th>\n" +
-    "       <th><input type=\"text\" st-search=\"'date'\" class=\"form-control th\" placeholder=\"Date\" disabled ></th>\n" +
-    "       <th><input type=\"text\" st-search=\"'created_at'\" class=\"form-control th\" placeholder=\"Created At\" disabled ></th>\n" +
-    "       <th><input type=\"text\" st-search=\"'updated_at'\" class=\"form-control th\" placeholder=\"Updated At\" disabled ></th>\n" +
-    "       <th><input type=\"text\" st-search=\"'parish_id'\" class=\"form-control th\" placeholder=\"P#\" disabled ></th>\n" +
-    "                    </tr>\n" +
-    "                </thead>\n" +
-    "                <tbody>\n" +
-    "\n" +
-    "              <tr ng-repeat=\"row in displayedCollection\"  st-select-row=\"row\" style=\"font-family: 'Roboto', sans-serif;\">\n" +
+    "<table class=\"ui inverted blue table\" st-safe-src=\"rowCollection\" st-table=\"displayedCollection\">\n" +
+    "  <thead>\n" +
+    "    <tr class=\"ui form filters\" colspan=\"9\" width=\"100\">\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'id'\" class=\"form-control th\" placeholder=\"#\" disabled ></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'name'\" class=\"form-control th\" placeholder=\"Name\" disabled ></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'content'\" class=\"form-control th\" placeholder=\"Content\" disabled ></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'tags'\" class=\"form-control th\" placeholder=\"Tags\" disabled ></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'date'\" class=\"form-control th\" placeholder=\"Date\" disabled ></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'created_at'\" class=\"form-control th\" placeholder=\"Created At\" disabled ></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'updated_at'\" class=\"form-control th\" placeholder=\"Updated At\" disabled ></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'parish_id'\" class=\"form-control th\" placeholder=\"#\" disabled ></th>\n" +
+    "       <th id=\"dms\"width=\"30\">\n" +
+    "    <button class=\"ui icon button btn-filter\">\n" +
+    "  <i class=\"search icon\"></i>\n" +
+    "    </button>\n" +
+    "  </tr></thead><tbody>\n" +
+    "    <tr ng-repeat=\"row in displayedCollection\"  st-select-row=\"row\">\n" +
     "                  <td>{{row.id}}</td>\n" +
     "                  <td>{{row.name}}</td>\n" +
     "                  <td>{{row.content}}</td>\n" +
@@ -2841,30 +2730,26 @@ angular.module("../app/partials/location/services.list.html", []).run(["$templat
     "                  <td>{{row.created_at}}</td>\n" +
     "                  <td>{{row.updated_at}}</td>\n" +
     "                  <td>{{row.parish_id}}</td>\n" +
-    "                  <td width=\"100\">\n" +
-    "                    <button type=\"button\" ng-click=\"getService(row)\" class=\"ui blue tiny button icon\">\n" +
-    "                      <i class=\"icon ion-more\">\n" +
-    "                      </i>\n" +
-    "                    </button>\n" +
-    "                    <button type=\"button\" ng-click=\"\" class=\"ui red tiny button icon\">\n" +
-    "                      <i class=\"icon ion-minus-circled\">\n" +
-    "                      </i>\n" +
-    "                    </button>\n" +
-    "                  </td>\n" +
-    "                </tr>\n" +
-    "                </tbody>\n" +
-    "                  <tfoot>\n" +
-    "    <tr>\n" +
-    "      <th colspan=\"1\">{{records}} Records</th>\n" +
-    "      <th colspan=\"5\" style=\"cursor: pointer;\">\n" +
-    "        <div st-pagination=\"\" st-items-by-page=\"recordsPerPage\" st-displayed-pages=\"pages\"></div>\n" +
-    "      </th>\n" +
+    "                                    <td width=\"100\">\n" +
+    "       <div class=\"ui buttons\">\n" +
+    "       <div data-content=\"Edit Parish Row\">\n" +
+    "              <button class=\"ui button\" ng-click=\"getParish(row)\">Edit</button>\n" +
+    "       </div>\n" +
+    "              <div class=\"or\"></div>\n" +
+    "       <div data-content=\"Delete Parish Row\">\n" +
+    "              <button class=\"ui negative button\" ng-click=\"\">Delete</button>\n" +
+    "       </div>\n" +
+    "      </div>\n" +
     "    </tr>\n" +
-    "  </tfoot>\n" +
-    "            </table>\n" +
+    "    <tr>\n" +
+    "<th colspan=\"1\">{{records}} Records</th>\n" +
+    "      <th colspan=\"6\" style=\"cursor: pointer;\">\n" +
+    "        <div st-pagination=\"\" st-items-by-page=\"recordsPerPage\" st-displayed-pages=\"pages\">\n" +
     "        </div>\n" +
+    "    </tr>\n" +
+    "  </tbody>\n" +
+    "</table>\n" +
     "</div>\n" +
-    "\n" +
     "<script>\n" +
     "$(document).ready(function(){\n" +
     "    $('.filterable .btn-filter').click(function(){\n" +
