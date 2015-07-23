@@ -5,6 +5,7 @@ app.controller(
     function(scope, rootScope, filter, timeout, DMSRestangular, state,
       localStorageService, MySessionService, auth, toastr, localStorage) {
 
+
 // I hangle the logout
      scope.handleSignOutBtnClick = function() {
         auth.signOut()

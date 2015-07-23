@@ -1,16 +1,46 @@
 <!-- Parishes' List -->
-
+<style>
+  .filterable {
+    margin-top: 15px;
+}
+.filterable .panel-heading .pull-right {
+    margin-top: -20px;
+}
+.filterable .filters input[disabled] {
+    background-color: transparent;
+    border: none;
+    cursor: auto;
+    box-shadow: none;
+    padding: 0;
+    height: auto;
+}
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]::-moz-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]:-ms-input-placeholder {
+    color: #333;
+}
+#dms{
+  background-color: #FFFFFF;
+}
+</style>
+        <div class="panel panel-primary filterable">
 <table class="ui inverted blue table" st-safe-src="rowCollection" st-table="displayedCollection">
   <thead>
-    <tr class="ui form">
-    <div class="fields">
-       <th><input type="text" st-search="'id'" placeholder="#"  ></th>
-       <th><input type="text" st-search="'name'" placeholder="Name"  ></th>
-       <th><input type="text" st-search="'location'" placeholder="Location"  ></th>
-       <th><input type="text" st-search="'in_charge'" placeholder="In Charge"  ></th>
-       <th><input type="text" st-search="'updated_at'" placeholder="Updated At"  ></th>
-       <th><input type="text" st-search="'created_at'" placeholder="Created At"  ></th>
-    </div>
+    <tr class="ui form filters" colspan="6">
+       <th id="dms"><input type="text" st-search="'id'" placeholder="#"  disabled=""></th>
+       <th id="dms"><input type="text" st-search="'name'" placeholder="Name"  disabled=""></th>
+       <th id="dms"><input type="text" st-search="'location'" placeholder="Location"  disabled=""></th>
+       <th id="dms"><input type="text" st-search="'in_charge'" placeholder="In Charge"  disabled=""></th>
+       <th id="dms"><input type="text" st-search="'updated_at'" placeholder="Updated At"  disabled=""></th>
+       <th id="dms"><input type="text" st-search="'created_at'" placeholder="Created At"  disabled=""></th>
+       <th id="dms" width="100">
+    <button class="ui icon button btn-filter">
+  <i class="search icon"></i>
+    </button>
   </tr></thead><tbody>
     <tr ng-repeat="row in displayedCollection"  st-select-row="row">
                   <td>{{row.id}}</td>
@@ -22,11 +52,11 @@
                                     <td width="100">
        <div class="ui buttons">
        <div data-content="Edit Parish Row">
-              <button class="ui postive button">Edit</button>
+              <button class="ui button" ng-click="getParish(row)">Edit</button>
        </div>
               <div class="or"></div>
        <div data-content="Delete Parish Row">
-              <button class="ui negative button">Delete</button>
+              <button class="ui negative button" ng-click="">Delete</button>
        </div>
       </div>
     </tr>
@@ -38,7 +68,7 @@
     </tr>
   </tbody>
 </table>
-
+</div>
 <script>
 $(document).ready(function(){
     $('.filterable .btn-filter').click(function(){

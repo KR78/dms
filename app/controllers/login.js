@@ -9,12 +9,12 @@ app.controller(
       
      scope.handleLoginBtnClick = function() {
           auth.submitLogin(scope.loginForm)
-            .then(function(resp) { 
-              // handle success response
+            .then(function(response) { 
+              toastr.info(response.status, 'Wow');
             })
-            .catch(function(resp) { 
-              // handle error response
-            console.log(resp.errors); //log any errors 
+            .catch(function(response) { 
+              toastr.info(response.status, 'Wow');
+            console.log(response.errors); //log any errors 
             });
         };
     
