@@ -8,16 +8,35 @@ app.controller("HomeCtrl", [ '$rootScope', '$scope' , function(rootScope, scope)
         lng: 36.8167,
         zoom: 12
       },
+      markers: [],
       layers: {
         baselayers: {
-          mapbox_outdoors: {
-            name: 'DMS Maps',
-            url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
-            type: 'xyz',
-            layerOptions: {
-              apikey: 'pk.eyJ1IjoidmljNzgiLCJhIjoiZjQ0MDNlMTVmYmNiYTFjY2Y2Mjk3ZTZmY2E0MDVhMTYifQ.qEquG4p4KKO2NY4ULPd7Lw',
-              mapid: 'vic78.f679a5b4'
-            }
+           mapbox_dark: {
+             name: 'Mapbox Dark',
+             url: 'https://a.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
+             type: 'xyz',
+             layerOptions: {
+               apikey: 'pk.eyJ1IjoidmljNzgiLCJhIjoiYjdkMzUwM2IyMjRiZWIxYzQ1Mjk5YTBjYmI2YzI2ZDMifQ.Tsm2SZhOm0IoY7aHzi0CAA',
+               mapid: 'vic78.f679a5b4'
+             }
+          },
+           mapbox_light: {
+             name: 'Mapbox Light',
+             url: 'https://a.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
+             type: 'xyz',
+             layerOptions: {
+               apikey: 'pk.eyJ1IjoidmljNzgiLCJhIjoiYjdkMzUwM2IyMjRiZWIxYzQ1Mjk5YTBjYmI2YzI2ZDMifQ.Tsm2SZhOm0IoY7aHzi0CAA',
+               mapid: 'vic78.f679a5b4'
+             }
+          },
+           mapbox_wheatpaste: {
+             name: 'Mapbox Wheat Paste',
+             url: 'https://a.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
+             type: 'xyz',
+             layerOptions: {
+               apikey: 'pk.eyJ1IjoidmljNzgiLCJhIjoiYjdkMzUwM2IyMjRiZWIxYzQ1Mjk5YTBjYmI2YzI2ZDMifQ.Tsm2SZhOm0IoY7aHzi0CAA',
+               mapid: 'vic78.f679a5b4'
+             }
           }
         }
       }
