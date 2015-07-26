@@ -53,6 +53,12 @@ app.controller(
         Dioceses.post(diocese);
 
       }
+
+      scope.delDiocese = function delDiocese(newDiocese){
+        scope.dioceseProfile = newDiocese;
+        deletedDiocese = DMSRestangular.one('dioceses', scope.dioceseProfile.id);
+        deletedDiocese.remove();
+      }
         
       scope.updateDiocese = function updateDiocese() {
         updatedDiocese = DMSRestangular.one('dioceses', scope.dioceseProfile.id);

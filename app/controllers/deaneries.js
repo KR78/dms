@@ -26,6 +26,12 @@ app.controller(
         });
       }
 
+      scope.delDeanery = function delDeanery(newDeanery){
+        scope.deaneryProfile = newDeanery;
+        deletedDeanery = DMSRestangular.one('deaneries', scope.deaneryProfile.id);
+        deletedDeanery.remove();
+      }
+
       scope.login = function login() {
         rootScope.user = [];
         var user = DMSRestangular.one('user').one('username', scope.formData

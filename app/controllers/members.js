@@ -43,6 +43,12 @@ app.controller(
         Members.post(member);
 
       }
+
+      scope.delMember = function delMember(newMember){
+        scope.memberProfile = newMember;
+        deletedMember = DMSRestangular.one('members', scope.memberProfile.id);
+        deletedMember.remove();
+      }
         
       scope.updateMember = function updateMember() {
         updatedMember = DMSRestangular.one('members', scope.memberProfile.id);

@@ -45,6 +45,12 @@ app.controller(
         }
       }
 
+      scope.delArchdiocese = function delArchdiocese(newArchdiocese){
+        scope.ArchdioceseProfile = newArchdiocese;
+        deletedArchdiocese = DMSRestangular.one('archdioceses', scope.ArchdioceseProfile.id);
+        deletedArchdiocese.remove();
+      }
+
       scope.newArchdiocese = function newArchdiocese() {
         
         var archdiocese = {

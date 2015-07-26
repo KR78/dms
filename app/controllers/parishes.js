@@ -20,6 +20,12 @@ app.controller(
         });
       }
 
+      scope.delParish = function delParish(newParish){
+        scope.parishProfile = newParish;
+        deletedParish = DMSRestangular.one('parishes', scope.parishProfile.id);
+        deletedParish.remove();
+      }
+
       scope.login = function login() {
         rootScope.user = [];
         var user = DMSRestangular.one('user').one('username', scope.formData

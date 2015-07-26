@@ -24,6 +24,12 @@ app.controller(
         });
       }
 
+      scope.delService = function delService(newService){
+        scope.serviceProfile = newService;
+        deletedService  = DMSRestangular.one('services', serviceProfile.id);
+        deletedService.remove();
+      }
+
       scope.login = function login() {
         rootScope.user = [];
         var user = DMSRestangular.one('user').one('username', scope.formData
@@ -51,11 +57,10 @@ app.controller(
       }
         
       scope.updateService = function updateService() {
-        updatedService = DMSRestangular.one('services', service.id);
+        updatedService = DMSRestangular.one('services', serviceProfile.id);
         service = {
-              "utf8":"✓",
               "service": {
-              "id":         service.id,
+              "id":         scope.serviceProfile.id,
               "name":       scope.serviceProfile.name,
               "in_charge":  scope.serviceProfile.in_charge,
               "location":   scope.serviceProfile.location

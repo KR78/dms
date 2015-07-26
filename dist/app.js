@@ -169,6 +169,12 @@ app.controller(
         }
       }
 
+      scope.delArchdiocese = function delArchdiocese(newArchdiocese){
+        scope.ArchdioceseProfile = newArchdiocese;
+        deletedArchdiocese = DMSRestangular.one('archdioceses', scope.ArchdioceseProfile.id);
+        deletedArchdiocese.remove();
+      }
+
       scope.newArchdiocese = function newArchdiocese() {
         
         var archdiocese = {
@@ -348,6 +354,12 @@ app.controller(
         });
       }
 
+      scope.delDeanery = function delDeanery(newDeanery){
+        scope.deaneryProfile = newDeanery;
+        deletedDeanery = DMSRestangular.one('deaneries', scope.deaneryProfile.id);
+        deletedDeanery.remove();
+      }
+
       scope.login = function login() {
         rootScope.user = [];
         var user = DMSRestangular.one('user').one('username', scope.formData
@@ -464,6 +476,12 @@ app.controller(
         Dioceses.post(diocese);
 
       }
+
+      scope.delDiocese = function delDiocese(newDiocese){
+        scope.dioceseProfile = newDiocese;
+        deletedDiocese = DMSRestangular.one('dioceses', scope.dioceseProfile.id);
+        deletedDiocese.remove();
+      }
         
       scope.updateDiocese = function updateDiocese() {
         updatedDiocese = DMSRestangular.one('dioceses', scope.dioceseProfile.id);
@@ -565,6 +583,12 @@ app.controller(
         Members.post(member);
 
       }
+
+      scope.delMember = function delMember(newMember){
+        scope.memberProfile = newMember;
+        deletedMember = DMSRestangular.one('members', scope.memberProfile.id);
+        deletedMember.remove();
+      }
         
       scope.updateMember = function updateMember() {
         updatedMember = DMSRestangular.one('members', scope.memberProfile.id);
@@ -644,6 +668,12 @@ app.controller(
           scope.rowCollection = parishes;
           scope.displayedCollection = [].concat(scope.rowCollection);
         });
+      }
+
+      scope.delParish = function delParish(newParish){
+        scope.parishProfile = newParish;
+        deletedParish = DMSRestangular.one('parishes', scope.parishProfile.id);
+        deletedParish.remove();
       }
 
       scope.login = function login() {
@@ -756,6 +786,12 @@ app.controller(
         });
       }
 
+      scope.delService = function delService(newService){
+        scope.serviceProfile = newService;
+        deletedService  = DMSRestangular.one('services', serviceProfile.id);
+        deletedService.remove();
+      }
+
       scope.login = function login() {
         rootScope.user = [];
         var user = DMSRestangular.one('user').one('username', scope.formData
@@ -783,11 +819,10 @@ app.controller(
       }
         
       scope.updateService = function updateService() {
-        updatedService = DMSRestangular.one('services', service.id);
+        updatedService = DMSRestangular.one('services', serviceProfile.id);
         service = {
-              "utf8":"✓",
               "service": {
-              "id":         service.id,
+              "id":         scope.serviceProfile.id,
               "name":       scope.serviceProfile.name,
               "in_charge":  scope.serviceProfile.in_charge,
               "location":   scope.serviceProfile.location
@@ -1786,7 +1821,7 @@ angular.module("../app/partials/location/archdioceses.list.html", []).run(["$tem
     "                      <i class=\"icon ion-more\">\n" +
     "                      </i>\n" +
     "                    </button>\n" +
-    "                    <button type=\"button\" ng-click=\"\" class=\"ui red tiny button icon\">\n" +
+    "                    <button type=\"button\" ng-click=\"delArchdiocese(row)\" class=\"ui red tiny button icon\">\n" +
     "                      <i class=\"icon ion-minus-circled\">\n" +
     "                      </i>\n" +
     "                    </button>\n" +
@@ -1953,7 +1988,7 @@ angular.module("../app/partials/location/deaneries.list.html", []).run(["$templa
     "                      <i class=\"icon ion-more\">\n" +
     "                      </i>\n" +
     "                    </button>\n" +
-    "                    <button type=\"button\" ng-click=\"\" class=\"ui red tiny button icon\">\n" +
+    "                    <button type=\"button\" ng-click=\"delDeanery(row)\" class=\"ui red tiny button icon\">\n" +
     "                      <i class=\"icon ion-minus-circled\">\n" +
     "                      </i>\n" +
     "                    </button>\n" +
@@ -2125,7 +2160,7 @@ angular.module("../app/partials/location/dioceses.list.html", []).run(["$templat
     "                      <i class=\"icon ion-more\">\n" +
     "                      </i>\n" +
     "                    </button>\n" +
-    "                    <button type=\"button\" ng-click=\"\" class=\"ui red tiny button icon\">\n" +
+    "                    <button type=\"button\" ng-click=\"delDiocese(row)\" class=\"ui red tiny button icon\">\n" +
     "                      <i class=\"icon ion-minus-circled\">\n" +
     "                      </i>\n" +
     "                    </button>\n" +
@@ -2191,8 +2226,8 @@ angular.module("../app/partials/location/dioceses.view.html", []).run(["$templat
     "        </div>\n" +
     "      </div>\n" +
     "      <div class=\"buttons\">\n" +
-    "        <button class=\"ui button blue\" ng-click=\"updateParish()\" ng-show=\"status=='update'\">Update Diocese</button>\n" +
-    "        <button class=\"ui button teal\" ng-click=\"newParish()\" ng-show=\"status=='add'\">Add Diocese</button>\n" +
+    "        <button class=\"ui button blue\" ng-click=\"updateDiocese()\" ng-show=\"status=='update'\">Update Diocese</button>\n" +
+    "        <button class=\"ui button teal\" ng-click=\"newDiocese()\" ng-show=\"status=='add'\">Add Diocese</button>\n" +
     "      </div>\n" +
     "      <div class=\"ui error message\"></div>\n" +
     "    </form>\n" +
@@ -2325,7 +2360,7 @@ angular.module("../app/partials/location/members.list.html", []).run(["$template
     "                      <i class=\"icon ion-more\">\n" +
     "                      </i>\n" +
     "                    </button>\n" +
-    "                    <button type=\"button\" ng-click=\"\" class=\"ui red tiny button icon\">\n" +
+    "                    <button type=\"button\" ng-click=\"delMember(row)\" class=\"ui red tiny button icon\">\n" +
     "                      <i class=\"icon ion-minus-circled\">\n" +
     "                      </i>\n" +
     "                    </button>\n" +
@@ -2489,7 +2524,7 @@ angular.module("../app/partials/location/parishes.list.html", []).run(["$templat
     "                      <i class=\"icon ion-more\">\n" +
     "                      </i>\n" +
     "                    </button>\n" +
-    "                    <button type=\"button\" ng-click=\"\" class=\"ui red tiny button icon\">\n" +
+    "                    <button type=\"button\" ng-click=\"delParish(row)\" class=\"ui red tiny button icon\">\n" +
     "                      <i class=\"icon ion-minus-circled\">\n" +
     "                      </i>\n" +
     "                    </button>\n" +
@@ -2729,7 +2764,7 @@ angular.module("../app/partials/location/services.list.html", []).run(["$templat
     "                      <i class=\"icon ion-more\">\n" +
     "                      </i>\n" +
     "                    </button>\n" +
-    "                    <button type=\"button\" ng-click=\"\" class=\"ui red tiny button icon\">\n" +
+    "                    <button type=\"button\" ng-click=\"delService(row)\" class=\"ui red tiny button icon\">\n" +
     "                      <i class=\"icon ion-minus-circled\">\n" +
     "                      </i>\n" +
     "                    </button>\n" +
