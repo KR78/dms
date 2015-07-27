@@ -56,7 +56,7 @@ app.controller(
          }
         };
         console.log(parish);
-        Parishes.post(parish);
+        Parishes.customPOST(parish);
 
       };
         

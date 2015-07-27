@@ -29,17 +29,16 @@
 </style>
         <div class="panel panel-primary filterable">
 <table class="ui inverted blue table" st-safe-src="rowCollection" st-table="displayedCollection">
-  <thead>
-    <tr class="ui form filters" colspan="9" width="100">
-       <th id="dms"><input type="text" st-search="'id'" class="form-control th" placeholder="#" disabled ></th>
+  <thead> 
+    <tr class="ui form filters">
+       <th id="dms"><input type="text" st-search="'id'" class="form-control th" placeholder="Row #" disabled ></th>
        <th id="dms"><input type="text" st-search="'name'" class="form-control th" placeholder="Name" disabled ></th>
        <th id="dms"><input type="text" st-search="'content'" class="form-control th" placeholder="Content" disabled ></th>
        <th id="dms"><input type="text" st-search="'tags'" class="form-control th" placeholder="Tags" disabled ></th>
        <th id="dms"><input type="text" st-search="'date'" class="form-control th" placeholder="Date" disabled ></th>
-       <th id="dms"><input type="text" st-search="'created_at'" class="form-control th" placeholder="Created At" disabled ></th>
        <th id="dms"><input type="text" st-search="'updated_at'" class="form-control th" placeholder="Updated At" disabled ></th>
-       <th id="dms"><input type="text" st-search="'parish_id'" class="form-control th" placeholder="#" disabled ></th>
-       <th id="dms"width="30">
+       <th id="dms"><input type="text" st-search="'parish_id'" class="form-control th" placeholder="Parish #" disabled ></th>
+       <th id="dms" colspan="9" width="100">
     <button class="ui icon button btn-filter">
   <i class="search icon"></i>
     </button>
@@ -66,7 +65,7 @@
     </tr>
     <tr>
 <th colspan="1">{{records}} Records</th>
-      <th colspan="6" style="cursor: pointer;">
+      <th colspan="9" style="cursor: pointer;">
         <div st-pagination="" st-items-by-page="recordsPerPage" st-displayed-pages="pages">
         </div>
     </tr>

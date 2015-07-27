@@ -21,12 +21,12 @@ app.controller("HomeCtrl", [ '$rootScope', '$scope' , function(rootScope, scope)
              }
           },
            mapbox_light: {
-             name: 'Mapbox Light',
+             name: 'Mapbox Satellite',
              url: 'https://a.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
              type: 'xyz',
              layerOptions: {
                apikey: 'pk.eyJ1IjoidmljNzgiLCJhIjoiYjdkMzUwM2IyMjRiZWIxYzQ1Mjk5YTBjYmI2YzI2ZDMifQ.Tsm2SZhOm0IoY7aHzi0CAA',
-               mapid: 'vic78.f679a5b4'
+               mapid: 'vic78.mphf9k8h'
              }
           },
            mapbox_wheatpaste: {
@@ -35,7 +35,7 @@ app.controller("HomeCtrl", [ '$rootScope', '$scope' , function(rootScope, scope)
              type: 'xyz',
              layerOptions: {
                apikey: 'pk.eyJ1IjoidmljNzgiLCJhIjoiYjdkMzUwM2IyMjRiZWIxYzQ1Mjk5YTBjYmI2YzI2ZDMifQ.Tsm2SZhOm0IoY7aHzi0CAA',
-               mapid: 'vic78.f679a5b4'
+               mapid: 'vic78.mp1jp046'
              }
           }
         }
