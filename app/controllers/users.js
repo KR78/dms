@@ -12,7 +12,7 @@ app.controller(
         console.log(newUser);
         scope.userProfile = newUser;
         state.go('users.view');
-      }
+      };
 
       scope.getUsers = function getUsers() {
         var AllUsers = DMSRestangular.all('users');
@@ -22,7 +22,7 @@ app.controller(
           scope.rowCollection = users;
           scope.displayedCollection = [].concat(scope.rowCollection);
         });
-      }
+      };
 
       scope.login = function login() {
         rootScope.user = [];
@@ -31,13 +31,11 @@ app.controller(
           'format', 'json');
         // This will query /accounts and return a promise.
         user.customGET('').then(function(userObj) {
-          localStorageService.set('dms_user', userObj);
+          localStorageService.set('meds_user', userObj);
           state.go('users');
 
         });
-      }
-
-      
+      };
 
       function getUserCount() {
         var AllUsers = DMSRestangular.all('users');

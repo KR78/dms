@@ -11,14 +11,14 @@ app.controller(
       scope.getMember = function getMember(newMember) {
         scope.memberProfile = newMember;
         state.go('location.members.view');
-      }
+      };
 
       scope.getMembers = function getMembers() {
         Members.customGET('').then(function(members) {
           scope.rowCollection = members;
           scope.displayedCollection = [].concat(scope.rowCollection);
         });
-      }
+      };
 
       scope.login = function login() {
         rootScope.user = [];
@@ -31,37 +31,7 @@ app.controller(
           state.go('dashboard');
 
         });
-      }
-
-      scope.newmember = function newmember() {
-        member = {
-              "members": {
-                  "name":       scope.memberProfile.name,
-         }
-        };
-        console.log(member);
-        Members.post(member);
-
-      }
-
-      scope.delMember = function delMember(newMember){
-        scope.memberProfile = newMember;
-        deletedMember = DMSRestangular.one('members', scope.memberProfile.id);
-        deletedMember.remove();
-      }
-        
-      scope.updateMember = function updateMember() {
-        updatedMember = DMSRestangular.one('members', scope.memberProfile.id);
-        
-        member = {
-              "members": {
-              "id":         scope.memberProfile.id,
-              "name":       scope.memberProfile.name
-         }
-        };
-        console.log(member);
-        updatedMember.customPUT(member);
-      }
+      };
 
       function getMemberCount() {
         Members.customGET('').then(function(members) {
@@ -76,12 +46,29 @@ app.controller(
         if (status == 'add') {
           scope.memberProfile = [];
         }
-      }
+      };
       scope.newMember = function newMember() {
 
-      }
+      };
 
-      
+      scope.delMember = function delMember(newMember){
+        scope.memberProfile = newMember;
+        deletedMember = DMSRestangular.one('members', scope.memberProfile.id);
+        deletedMember.remove();
+      };
+        
+      scope.updateMember = function updateMember() {
+        updatedMember = DMSRestangular.one('members', scope.memberProfile.id);
+        
+        member = {
+              "members": {
+              "id":         scope.memberProfile.id,
+              "name":       scope.memberProfile.name
+         }
+        };
+        console.log(member);
+        updatedMember.customPUT(member);
+      };
 
     }
   ]

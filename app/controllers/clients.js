@@ -1,25 +1,25 @@
 // I control the main demo.
 app.controller(
-	"clientsCtrl", ['$scope', '$rootScope', '$filter', '$timeout', 'DMSRestangular', '$state', 'localStorageService', 'MySessionService', function(scope, rootScope, filter, timeout, DMSRestangular, state, localStorageService, MySessionService) {
+	"clientsCtrl", ['$scope', '$rootScope', '$filter', '$timeout', 'MedsRestangular', '$state', 'localStorageService', 'MySessionService', function(scope, rootScope, filter, timeout, MedsRestangular, state, localStorageService, MySessionService) {
 		getClientCount();
 
 		scope.getClient = function getClient(newClient) {
 			scope.clientProfile = newClient;
 			state.go('clients.view');
-		}
+		};
 
 		scope.getClients = function getClients() {
-			var AllClients = DMSRestangular.all('clients');
+			var AllClients = MedsRestangular.all('clients');
 			// This will query /accounts and return a promise.
 			AllClients.customGET('').then(function(clients) {
 				//console.log(clients);
 				scope.rowCollection = clients;
 				scope.displayedCollection = [].concat(scope.rowCollection);
 			});
-		}
+		};
 
 		function getClientCount() {
-			var AllClients = DMSRestangular.all('clients');
+			var AllClients = MedsRestangular.all('clients');
 			// This will query /accounts and return a promise.
 			AllClients.customGET('').then(function(clients) {
 				// console.log(clients);

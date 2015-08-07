@@ -11,20 +11,14 @@ app.controller(
       scope.getParish = function getParish(newParish) {
         scope.parishProfile = newParish;
         state.go('location.parishes.view');
-      }
+      };
 
       scope.getParishes = function getParishes() {
         Parishes.customGET('').then(function(parishes) {
           scope.rowCollection = parishes;
           scope.displayedCollection = [].concat(scope.rowCollection);
         });
-      }
-
-      scope.delParish = function delParish(newParish){
-        scope.parishProfile = newParish;
-        deletedParish = DMSRestangular.one('parishes', scope.parishProfile.id);
-        deletedParish.remove();
-      }
+      };
 
       scope.login = function login() {
         rootScope.user = [];
@@ -33,11 +27,11 @@ app.controller(
           'format', 'json');
         // This will query /accounts and return a promise.
         user.customGET('').then(function(userObj) {
-          localStorageService.set('dms_user', userObj);
+          localStorageService.set('meds_user', userObj);
           state.go('users');
 
         });
-      }
+      };
 
       function getParishCount() {
         Parishes.customGET('').then(function(parishes) {
@@ -52,7 +46,7 @@ app.controller(
         if (status == 'add') {
           scope.parishProfile = [];
         }
-      }
+      };
       scope.newParish = function newParish() {
         parish = {
               "parish": {
@@ -62,11 +56,17 @@ app.controller(
          }
         };
         console.log(parish);
-        Parishes.post(parish);
+        Parishes.customPOST(parish);
 
-      }
+      };
+
+      scope.delParish = function delParish(newParish){
+        scope.parishProfile = newParish;
+        deletedParish = DMSRestangular.one('parishes', scope.parishProfile.id);
+        deletedParish.remove();
+      };
         
-      scope.updateParish = function updateParish() {
+        scope.updateParish = function updateParish() {
         updatedParish = DMSRestangular.one('parishes', scope.parishProfile.id);
 
         today = new Date();
@@ -84,9 +84,13 @@ app.controller(
               "location":   scope.parishProfile.location
               }
         };
-        updatedParish.customPUT(parish);
+        updatedParish.customPUT(parish).then(function(response){
+        toastr.info('Update Successful', 'Awesome!'); 
+        }, function(response) {
+        toastr.danger('Update was not successfyl', 'Wow!'); 
+        });
         console.log(scope.parishProfile.id);
-      }
+      };
 
     }
   ]

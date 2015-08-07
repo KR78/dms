@@ -8,29 +8,21 @@ app.controller(
       getDeaneryCount();
       rootScope.user = MySessionService.getLoggedUser();
 
-      var Deaneries = DMSRestangular.all('deaneries');
-
       scope.getDeanery = function getDeanery(newDeanery) {
         console.log(newDeanery);
         scope.DeaneryProfile = newDeanery;
         state.go('location.deaneries.view');
-      }
+      };
 
       scope.getDeaneries = function getDeaneries() {
-        
+        var Deaneries = DMSRestangular.all('deaneries');
         // This will query /accounts and return a promise.
         Deaneries.customGET('').then(function(deaneries) {
           //console.log(users);
           scope.rowCollection = deaneries;
           scope.displayedCollection = [].concat(scope.rowCollection);
         });
-      }
-
-      scope.delDeanery = function delDeanery(newDeanery){
-        scope.deaneryProfile = newDeanery;
-        deletedDeanery = DMSRestangular.one('deaneries', scope.deaneryProfile.id);
-        deletedDeanery.remove();
-      }
+      };
 
       scope.login = function login() {
         rootScope.user = [];
@@ -39,33 +31,18 @@ app.controller(
           'format', 'json');
         // This will query /accounts and return a promise.
         user.customGET('').then(function(userObj) {
-          localStorageService.set('dms_user', userObj);
+          localStorageService.set('meds_user', userObj);
           state.go('users');
 
         });
-      }
+      };
 
-    scope.setStatus = function setStatus(status) {
-        scope.status = status;
-        if (status == 'add') {
-          scope.deaneryProfile = [];
-        }
-      }
+      scope.delDeanery = function delDeanery(newDeanery){
+        scope.deaneryProfile = newDeanery;
+        deletedDeanery = DMSRestangular.one('deaneries', scope.deaneryProfile.id);
+        deletedDeanery.remove();
+      };
 
-      scope.newDeanery = function newdeanery() {
-        
-        deanery = {
-              "deanery": {
-                  "name":       scope.deaneryProfile.name,
-                  "in_charge":  scope.deaneryProfile.in_charge,
-                  "location":   scope.deaneryProfile.location
-         }
-        };
-        console.log(deanery);
-        Deaneries.post(deanery);
-
-      }
-        
       scope.updateDeanery = function updateDeanery() {
         updatedDeanery = DMSRestangular.one('deaneries', scope.deaneryProfile.id);
         deanery = {
@@ -78,9 +55,17 @@ app.controller(
         };
         console.log(deanery);
         updatedDeanery.customPUT(deanery);
-      }
+      };
+
+      scope.setStatus = function setStatus(status) {
+        scope.status = status;
+        if (status == 'add') {
+          scope.parishProfile = [];
+        }
+      };
 
       function getDeaneryCount() {
+        var Deaneries = DMSRestangular.all('deaneries');
         // This will query /accounts and return a promise.
         Deaneries.customGET('').then(function(deaneries) {
           // console.log(users);
