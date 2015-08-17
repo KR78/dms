@@ -5,8 +5,7 @@ Working with AngularJS
 Installation
 ------
 **Clone this repo**:
-~~~javascript
-run 'git clone http://gitlab.hpstrathmore.or.ke/research/dms.git' on your desktop or preferred location
+~~~
 ~~~
 **Install "dependencies" and "devDependencies" for the project found in the package.json file**:
 ~~~javascript
