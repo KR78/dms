@@ -8,6 +8,8 @@ app.controller(
       getArchdioceseCount();
       rootScope.user = MySessionService.getLoggedUser();
 
+      var Archdioceses = DMSRestangular.all('archdioceses');
+
       scope.getArchdiocese = function getArchdiocese(newArchdiocese) {
         console.log(newArchdiocese);
         scope.ArchdioceseProfile = newArchdiocese;
@@ -22,6 +24,17 @@ app.controller(
           scope.rowCollection = archdioceses;
           scope.displayedCollection = [].concat(scope.rowCollection);
         });
+      };
+
+      scope.newArchiocese = function newArchdiocese() {
+        archdiocese = {
+              "archdiocese": {
+                  "name":           scope.ArchdioceseProfile.name,
+         }
+        };
+        console.log(archdiocese);
+        Archdioceses.customPOST(archdiocese);
+
       };
 
       scope.delArchdiocese = function delArchdiocese(newArchdiocese){

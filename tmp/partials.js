@@ -1,4 +1,4 @@
-angular.module('templates-dist', ['../app/partials/clients/form.html', '../app/partials/clients/index.html', '../app/partials/clients/list.html', '../app/partials/dashboard.html', '../app/partials/front-end/index.html', '../app/partials/front-end/login.html', '../app/partials/front-end/register.html', '../app/partials/global/dashboard.html', '../app/partials/global/forms/side-menu.html', '../app/partials/global/head.html', '../app/partials/global/header.html', '../app/partials/global/headerCrud.html', '../app/partials/global/rails.html', '../app/partials/global/side-menu.html', '../app/partials/knowledge-base/form.html', '../app/partials/knowledge-base/index.html', '../app/partials/knowledge-base/list.html', '../app/partials/location/archdioceses.index.html', '../app/partials/location/archdioceses.list.html', '../app/partials/location/archdioceses.view.html', '../app/partials/location/deaneries.index.html', '../app/partials/location/deaneries.list.html', '../app/partials/location/deaneries.view.html', '../app/partials/location/dioceses.index.html', '../app/partials/location/dioceses.list.html', '../app/partials/location/dioceses.view.html', '../app/partials/location/index.html', '../app/partials/location/members.index.html', '../app/partials/location/members.list.html', '../app/partials/location/members.view.html', '../app/partials/location/parishes.index.html', '../app/partials/location/parishes.list.html', '../app/partials/location/parishes.view.html', '../app/partials/location/services.add.html', '../app/partials/location/services.index.html', '../app/partials/location/services.list.html', '../app/partials/location/services.today.html', '../app/partials/location/services.view.html', '../app/partials/test-requests/index.html', '../app/partials/test-requests/list.html', '../app/partials/tests/dissolution/form.html', '../app/partials/tests/dissolution/hplc.html', '../app/partials/tests/dissolution/index.html', '../app/partials/tests/index.html', '../app/partials/tests/list.html', '../app/partials/users/form.html', '../app/partials/users/index.html', '../app/partials/users/list.html', '../app/partials/users/lock-screen.html', '../app/partials/users/login.html', '../app/partials/users/register.html', '../app/partials/users/statistics.html']);
+angular.module('templates-dist', ['../app/partials/clients/form.html', '../app/partials/clients/index.html', '../app/partials/clients/list.html', '../app/partials/dashboard.html', '../app/partials/front-end/index.html', '../app/partials/front-end/login.html', '../app/partials/front-end/register.html', '../app/partials/global/dashboard.html', '../app/partials/global/forms/side-menu.html', '../app/partials/global/head.html', '../app/partials/global/header.html', '../app/partials/global/headerCrud.html', '../app/partials/global/rails.html', '../app/partials/global/side-menu.html', '../app/partials/knowledge-base/form.html', '../app/partials/knowledge-base/index.html', '../app/partials/knowledge-base/list.html', '../app/partials/location/archdioceses.index.html', '../app/partials/location/archdioceses.list.html', '../app/partials/location/archdioceses.view.html', '../app/partials/location/deaneries.index.html', '../app/partials/location/deaneries.list.html', '../app/partials/location/deaneries.view.html', '../app/partials/location/dioceses.index.html', '../app/partials/location/dioceses.list.html', '../app/partials/location/dioceses.view.html', '../app/partials/location/index.html', '../app/partials/location/members.index.html', '../app/partials/location/members.list.html', '../app/partials/location/members.view.html', '../app/partials/location/organisations.index.html', '../app/partials/location/organisations.list.html', '../app/partials/location/organisations.view.html', '../app/partials/location/parishes.index.html', '../app/partials/location/parishes.list.html', '../app/partials/location/parishes.view.html', '../app/partials/location/services.add.html', '../app/partials/location/services.index.html', '../app/partials/location/services.list.html', '../app/partials/location/services.today.html', '../app/partials/location/services.view.html', '../app/partials/test-requests/index.html', '../app/partials/test-requests/list.html', '../app/partials/tests/dissolution/form.html', '../app/partials/tests/dissolution/hplc.html', '../app/partials/tests/dissolution/index.html', '../app/partials/tests/index.html', '../app/partials/tests/list.html', '../app/partials/users/form.html', '../app/partials/users/index.html', '../app/partials/users/list.html', '../app/partials/users/lock-screen.html', '../app/partials/users/login.html', '../app/partials/users/register.html', '../app/partials/users/statistics.html']);
 
 angular.module("../app/partials/clients/form.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("../app/partials/clients/form.html",
@@ -525,17 +525,17 @@ angular.module("../app/partials/knowledge-base/list.html", []).run(["$templateCa
 
 angular.module("../app/partials/location/archdioceses.index.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("../app/partials/location/archdioceses.index.html",
-    "<!-- Archidiocese Index -->\n" +
+    "<!-- Archdiocese Index -->\n" +
     "<nav class=\"ui inverted blue menu\">\n" +
     "  <div href=\"\" ui-sref=\"location.archdioceses\" class=\"item\">\n" +
     "    <b>\n" +
     "      <i class=\"icon building\"></i>\n" +
-    "      Archidiocese\n" +
+    "      Archdiocese\n" +
     "    </b>\n" +
     "  </div>\n" +
     "  <a is-active-nav class=\"item\" ui-sref=\"location.archdioceses.statistics\"><i class=\"icon ion-arrow-graph-up-right\"></i>Statistics</a>\n" +
-    "  <a is-active-nav class=\"item\" ui-sref=\"location.archdioceses.list\"><i class=\"icon fa fa-list\"></i>List Archidiocese</a>\n" +
-    "  <a is-active-nav class=\"item\" ui-sref=\"location.archdioceses.add\"><i class=\"icon fa fa-plus\"></i>Register Archidiocese</a>\n" +
+    "  <a is-active-nav class=\"item\" ui-sref=\"location.archdioceses.list\"><i class=\"icon fa fa-list\"></i>List Archdiocese</a>\n" +
+    "  <a is-active-nav class=\"item\" ui-sref=\"location.archdioceses.add\"><i class=\"icon fa fa-plus\"></i>Register Archdiocese</a>\n" +
     "</nav>\n" +
     "<div ui-view></div>\n" +
     "");
@@ -591,11 +591,11 @@ angular.module("../app/partials/location/archdioceses.list.html", []).run(["$tem
     "                                    <td width=\"100\">\n" +
     "       <div class=\"ui buttons\">\n" +
     "       <div data-content=\"Edit Parish Row\">\n" +
-    "              <button class=\"ui button\" ng-click=\"getParish(row)\">Edit</button>\n" +
+    "              <button class=\"ui button\" ng-click=\"getArchdiocese(row)\">Edit</button>\n" +
     "       </div>\n" +
     "              <div class=\"or\"></div>\n" +
     "       <div data-content=\"Delete Parish Row\">\n" +
-    "              <button class=\"ui negative button\" ng-click=\"\">Delete</button>\n" +
+    "              <button class=\"ui negative button\" ng-click=\"delArchdiocese(row)\">Delete</button>\n" +
     "       </div>\n" +
     "      </div>\n" +
     "    </tr>\n" +
@@ -743,11 +743,11 @@ angular.module("../app/partials/location/deaneries.list.html", []).run(["$templa
     "                                    <td width=\"100\">\n" +
     "       <div class=\"ui buttons\">\n" +
     "       <div data-content=\"Edit Parish Row\">\n" +
-    "              <button class=\"ui button\" ng-click=\"getParish(row)\">Edit</button>\n" +
+    "              <button class=\"ui button\" ng-click=\"getDeanery(row)\">Edit</button>\n" +
     "       </div>\n" +
     "              <div class=\"or\"></div>\n" +
     "       <div data-content=\"Delete Parish Row\">\n" +
-    "              <button class=\"ui negative button\" ng-click=\"\">Delete</button>\n" +
+    "              <button class=\"ui negative button\" ng-click=\"delDeanery(row)\">Delete</button>\n" +
     "       </div>\n" +
     "      </div>\n" +
     "    </tr>\n" +
@@ -787,26 +787,28 @@ angular.module("../app/partials/location/deaneries.view.html", []).run(["$templa
     "    <form class=\"ui form ui segment\" id=\"memberForm\">\n" +
     "      <div class=\"fields\">\n" +
     "        <div class=\"field eight wide required\">\n" +
-    "          <label>ID</label>\n" +
+    "          <label>Name</label>\n" +
     "          <div class=\"ui icon left input\">\n" +
     "            <i class=\"icon building\"></i>\n" +
-    "            <input name=\"fname\" id=\"fname\" type=\"text\" ng-model=\"DeaneryProfile.id\"/>\n" +
+    "            <input name=\"fname\" id=\"fname\" type=\"text\" ng-model=\"deaneryProfile.name\"/>\n" +
     "          </div>\n" +
     "\n" +
     "        </div>\n" +
     "      </div>\n" +
     "      <div class=\"fields\">\n" +
     "        <div class=\"field eight wide required\">\n" +
-    "          <label>Created At</label>\n" +
+    "          <label>Diocese</label>\n" +
     "          <div class=\"ui icon left input\">\n" +
     "            <i class=\"icon building\"></i>\n" +
-    "            <input name=\"fname\" id=\"fname\" type=\"text\" ng-model=\"DeaneryProfile.created_at\"/>\n" +
+    "            <select name=\"lname\" id=\"fname\" ng-model=\"deaneryProfile.diocese_id\" >\n" +
+    "            <option  ng-repeat=\"row in displayedCollection_\" value=\"{{row.id}}\">{{row.name}}</option>\n" +
+    "            </select>\n" +
     "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "      <div class=\"buttons\">\n" +
-    "        <button class=\"ui button blue\" ng-click=\"updateDeanery()\" ng-show=\"status=='update'\">Update Archdiocese</button>\n" +
-    "        <button class=\"ui button teal\" ng-click=\"newDeanery()\" ng-show=\"status=='add'\">Add Archdiocese</button>\n" +
+    "        <button class=\"ui button blue\" ng-click=\"updateDeanery()\" ng-show=\"status=='update'\">Update Deanery</button>\n" +
+    "        <button class=\"ui button teal\" ng-click=\"newDeanery()\" ng-show=\"status=='add'\">Add Deanery</button>\n" +
     "      </div>\n" +
     "      <div class=\"ui error message\"></div>\n" +
     "    </form>\n" +
@@ -899,11 +901,11 @@ angular.module("../app/partials/location/dioceses.list.html", []).run(["$templat
     "                                    <td width=\"100\">\n" +
     "       <div class=\"ui buttons\">\n" +
     "       <div data-content=\"Edit Parish Row\">\n" +
-    "              <button class=\"ui button\" ng-click=\"getParish(row)\">Edit</button>\n" +
+    "              <button class=\"ui button\" ng-click=\"getDiocese(row)\">Edit</button>\n" +
     "       </div>\n" +
     "              <div class=\"or\"></div>\n" +
     "       <div data-content=\"Delete Parish Row\">\n" +
-    "              <button class=\"ui negative button\" ng-click=\"\">Delete</button>\n" +
+    "              <button class=\"ui negative button\" ng-click=\"delDiocese(row)\">Delete</button>\n" +
     "       </div>\n" +
     "      </div>\n" +
     "    </tr>\n" +
@@ -953,16 +955,19 @@ angular.module("../app/partials/location/dioceses.view.html", []).run(["$templat
     "      </div>\n" +
     "      <div class=\"fields\">\n" +
     "        <div class=\"field eight wide required\">\n" +
-    "          <label>In Charge</label>\n" +
+    "          <label>Archdiocese</label>\n" +
     "          <div class=\"ui icon left input\">\n" +
     "            <i class=\"icon building\"></i>\n" +
-    "            <input name=\"fname\" id=\"fname\" type=\"text\" ng-model=\"dioceseProfile.in_charge\"/>\n" +
+    "            \n" +
+    "            <select name=\"lname\" id=\"fname\" ng-model=\"dioceseProfile.archdiocese_id\" >\n" +
+    "            <option  ng-repeat=\"row in displayedCollection_\" value=\"{{row.id}}\">{{row.name}}</option>\n" +
+    "            </select>\n" +
     "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "      <div class=\"buttons\">\n" +
-    "        <button class=\"ui button blue\" ng-click=\"updateParish()\" ng-show=\"status=='update'\">Update Diocese</button>\n" +
-    "        <button class=\"ui button teal\" ng-click=\"newParish()\" ng-show=\"status=='add'\">Add Diocese</button>\n" +
+    "        <button class=\"ui button blue\" ng-click=\"updateDiocese()\" ng-show=\"status=='update'\">Update Diocese</button>\n" +
+    "        <button class=\"ui button teal\" ng-click=\"newDiocese()\" ng-show=\"status=='add'\">Add Diocese</button>\n" +
     "      </div>\n" +
     "      <div class=\"ui error message\"></div>\n" +
     "    </form>\n" +
@@ -1081,11 +1086,11 @@ angular.module("../app/partials/location/members.list.html", []).run(["$template
     "                                    <td width=\"100\">\n" +
     "       <div class=\"ui buttons\">\n" +
     "       <div data-content=\"Edit Parish Row\">\n" +
-    "              <button class=\"ui button\" ng-click=\"getParish(row)\">Edit</button>\n" +
+    "              <button class=\"ui button\" ng-click=\"getMember(row)\">Edit</button>\n" +
     "       </div>\n" +
     "              <div class=\"or\"></div>\n" +
     "       <div data-content=\"Delete Parish Row\">\n" +
-    "              <button class=\"ui negative button\" ng-click=\"\">Delete</button>\n" +
+    "              <button class=\"ui negative button\" ng-click=\"delMember(row)\">Delete</button>\n" +
     "       </div>\n" +
     "      </div>\n" +
     "    </tr>\n" +
@@ -1137,6 +1142,167 @@ angular.module("../app/partials/location/members.view.html", []).run(["$template
     "      <div class=\"buttons\">\n" +
     "        <button class=\"ui button blue\" ng-click=\"updateMember()\" ng-show=\"status=='update'\">Update Member</button>\n" +
     "        <button class=\"ui button teal\" ng-click=\"newMember()\" ng-show=\"status=='add'\">Add Member</button>\n" +
+    "      </div>\n" +
+    "      <div class=\"ui error message\"></div>\n" +
+    "    </form>\n" +
+    "\n" +
+    "  </div>\n" +
+    "  <div class=\"four wide column\">\n" +
+    "    <div class=\"ui segment\">\n" +
+    "      <div class=\"ui statistic\" id=\"total\">\n" +
+    "        <div class=\"value\">\n" +
+    "          {{records}}\n" +
+    "        </div>\n" +
+    "        <div class=\"label\">\n" +
+    "          <i class=\"icon database\"></i>Total Records\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "");
+}]);
+
+angular.module("../app/partials/location/organisations.index.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("../app/partials/location/organisations.index.html",
+    "<!-- Organisation Index -->\n" +
+    "<nav class=\"ui inverted blue menu\">\n" +
+    "  <div href=\"\" ui-sref=\"location.organisations\" class=\"item\">\n" +
+    "    <b>\n" +
+    "      <i class=\"icon building\"></i>\n" +
+    "      Organisation\n" +
+    "    </b>\n" +
+    "  </div>\n" +
+    "  <a is-active-nav class=\"item\" ui-sref=\"location.organisations.statistics\"><i class=\"icon ion-arrow-graph-up-right\"></i>Statistics</a>\n" +
+    "  <a is-active-nav class=\"item\" ui-sref=\"location.organisations.list\"><i class=\"icon fa fa-list\"></i>List Organisation</a>\n" +
+    "  <a is-active-nav class=\"item\" ui-sref=\"location.organisations.add\"><i class=\"icon fa fa-plus\"></i>Register Organisation</a>\n" +
+    "</nav>\n" +
+    "<div ui-view></div>\n" +
+    "");
+}]);
+
+angular.module("../app/partials/location/organisations.list.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("../app/partials/location/organisations.list.html",
+    "<!-- Organisations' List -->\n" +
+    "<style>\n" +
+    "  .filterable {\n" +
+    "    margin-top: 15px;\n" +
+    "}\n" +
+    ".filterable .panel-heading .pull-right {\n" +
+    "    margin-top: -20px;\n" +
+    "}\n" +
+    ".filterable .filters input[disabled] {\n" +
+    "    background-color: transparent;\n" +
+    "    border: none;\n" +
+    "    cursor: auto;\n" +
+    "    box-shadow: none;\n" +
+    "    padding: 0;\n" +
+    "    height: auto;\n" +
+    "}\n" +
+    ".filterable .filters input[disabled]::-webkit-input-placeholder {\n" +
+    "    color: #333;\n" +
+    "}\n" +
+    ".filterable .filters input[disabled]::-moz-placeholder {\n" +
+    "    color: #333;\n" +
+    "}\n" +
+    ".filterable .filters input[disabled]:-ms-input-placeholder {\n" +
+    "    color: #333;\n" +
+    "}\n" +
+    "#dms{\n" +
+    "  background-color: #FFFFFF;\n" +
+    "}\n" +
+    "</style>\n" +
+    "        <div class=\"panel panel-primary filterable\">\n" +
+    "<table class=\"ui inverted blue table\" st-safe-src=\"rowCollection\" st-table=\"displayedCollection\">\n" +
+    "  <thead>\n" +
+    "    <tr class=\"ui form filters\" colspan=\"3\">\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'id'\" class=\"form-control th\" placeholder=\"#\" disabled ></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'name'\" class=\"form-control th\" placeholder=\"Name\" disabled ></th>\n" +
+    "       <th id=\"dms\"><input type=\"text\" st-search=\"'description'\" class=\"form-control th\" placeholder=\"Description\" disabled ></th>\n" +
+    "       <th id=\"dms\" width=\"100\">\n" +
+    "    <button class=\"ui icon button btn-filter\">\n" +
+    "  <i class=\"search icon\"></i>\n" +
+    "    </button>\n" +
+    "  </tr></thead><tbody>\n" +
+    "    <tr ng-repeat=\"row in displayedCollection\"  st-select-row=\"row\">\n" +
+    "                  <td>{{row.id}}</td>\n" +
+    "                  <td>{{row.name}}</td>\n" +
+    "                  <td>{{row.description}}</td>\n" +
+    "                                    <td width=\"100\">\n" +
+    "       <div class=\"ui buttons\">\n" +
+    "       <div data-content=\"Edit Parish Row\">\n" +
+    "              <button class=\"ui button\" ng-click=\"getOrganisation(row)\">Edit</button>\n" +
+    "       </div>\n" +
+    "              <div class=\"or\"></div>\n" +
+    "       <div data-content=\"Delete Parish Row\">\n" +
+    "              <button class=\"ui negative button\" ng-click=\"delOrganisation(row)\">Delete</button>\n" +
+    "       </div>\n" +
+    "      </div>\n" +
+    "    </tr>\n" +
+    "    <tr>\n" +
+    "<th colspan=\"1\">{{records}} Records</th>\n" +
+    "      <th colspan=\"6\" style=\"cursor: pointer;\">\n" +
+    "        <div st-pagination=\"\" st-items-by-page=\"recordsPerPage\" st-displayed-pages=\"pages\">\n" +
+    "        </div>\n" +
+    "    </tr>\n" +
+    "  </tbody>\n" +
+    "</table>\n" +
+    "</div>\n" +
+    "<script>\n" +
+    "$(document).ready(function(){\n" +
+    "    $('.filterable .btn-filter').click(function(){\n" +
+    "        var $panel = $(this).parents('.filterable'),\n" +
+    "        $filters = $panel.find('.filters input'),\n" +
+    "        $tbody = $panel.find('.table tbody');\n" +
+    "        if ($filters.prop('disabled') == true) {\n" +
+    "            $filters.prop('disabled', false);\n" +
+    "            $filters.first().focus();\n" +
+    "        } else {\n" +
+    "            $filters.val('').prop('disabled', true);\n" +
+    "            $tbody.find('.no-result').remove();\n" +
+    "            $tbody.find('tr').show();\n" +
+    "        }\n" +
+    "    });\n" +
+    "});\n" +
+    "</script>");
+}]);
+
+angular.module("../app/partials/location/organisations.view.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("../app/partials/location/organisations.view.html",
+    "<div class=\"ui grid\">\n" +
+    "  <div class=\"twelve wide column\">\n" +
+    "    <!-- Form -->\n" +
+    "    <form class=\"ui form ui segment\" id=\"memberForm\">\n" +
+    "      <div class=\"fields\">\n" +
+    "        <div class=\"field eight wide required\">\n" +
+    "          <label>ID</label>\n" +
+    "          <div class=\"ui icon left input\">\n" +
+    "            <i class=\"icon building\"></i>\n" +
+    "            <input name=\"fname\" id=\"fname\" type=\"text\" ng-model=\"OrganisationProfile.id\"/>\n" +
+    "          </div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "      <div class=\"fields\">\n" +
+    "        <div class=\"field eight wide required\">\n" +
+    "          <label>Name</label>\n" +
+    "          <div class=\"ui icon left input\">\n" +
+    "            <i class=\"icon building\"></i>\n" +
+    "            <input name=\"fname\" id=\"fname\" type=\"text\" ng-model=\"OrganisationProfile.name\"/>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "      <div class=\"fields\">\n" +
+    "        <div class=\"field eight wide required\">\n" +
+    "          <label>Description</label>\n" +
+    "          <div class=\"ui icon left input\">\n" +
+    "            <i class=\"icon building\"></i>\n" +
+    "            <input name=\"fname\" id=\"fname\" type=\"text\" ng-model=\"OrganisationProfile.description\"/>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "      <div class=\"buttons\">\n" +
+    "        <button class=\"ui button blue\" ng-click=\"updateOrganisation()\" ng-show=\"status=='update'\">Update Organisation</button>\n" +
+    "        <button class=\"ui button teal\" ng-click=\"newOrganisation()\" ng-show=\"status=='add'\">Add Organisation</button>\n" +
     "      </div>\n" +
     "      <div class=\"ui error message\"></div>\n" +
     "    </form>\n" +
@@ -1235,7 +1401,7 @@ angular.module("../app/partials/location/parishes.list.html", []).run(["$templat
     "       </div>\n" +
     "              <div class=\"or\"></div>\n" +
     "       <div data-content=\"Delete Parish Row\">\n" +
-    "              <button class=\"ui negative button\" ng-click=\"\">Delete</button>\n" +
+    "              <button class=\"ui negative button\" ng-click=\"delParish(row)\">Delete</button>\n" +
     "       </div>\n" +
     "      </div>\n" +
     "    </tr>\n" +
@@ -1297,6 +1463,17 @@ angular.module("../app/partials/location/parishes.view.html", []).run(["$templat
     "          <div class=\"ui icon left input\">\n" +
     "            <i class=\"icon building\"></i>\n" +
     "            <input name=\"fname\" id=\"fname\" type=\"text\" ng-model=\"parishProfile.in_charge\"/>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "      <div class=\"fields\">\n" +
+    "        <div class=\"field eight wide required\">\n" +
+    "          <label>Deanery</label>\n" +
+    "          <div class=\"ui icon left input\">\n" +
+    "            <i class=\"icon building\"></i>\n" +
+    "            <select name=\"fname\" id=\"fname\" ng-model=\"parishProfile.deanery_id\" >\n" +
+    "            <option  ng-repeat=\"row in displayedCollection_\" value=\"{{row.id}}\">{{row.name}}</option>\n" +
+    "            </select>\n" +
     "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +
@@ -1459,11 +1636,11 @@ angular.module("../app/partials/location/services.list.html", []).run(["$templat
     "                                    <td width=\"100\">\n" +
     "       <div class=\"ui buttons\">\n" +
     "       <div data-content=\"Edit Parish Row\">\n" +
-    "              <button class=\"ui button\" ng-click=\"getParish(row)\">Edit</button>\n" +
+    "              <button class=\"ui button\" ng-click=\"getService(row)\">Edit</button>\n" +
     "       </div>\n" +
     "              <div class=\"or\"></div>\n" +
     "       <div data-content=\"Delete Parish Row\">\n" +
-    "              <button class=\"ui negative button\" ng-click=\"\">Delete</button>\n" +
+    "              <button class=\"ui negative button\" ng-click=\"delService(row)\">Delete</button>\n" +
     "       </div>\n" +
     "      </div>\n" +
     "    </tr>\n" +

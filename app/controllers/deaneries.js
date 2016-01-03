@@ -7,6 +7,7 @@ app.controller(
 
       getDeaneryCount();
       rootScope.user = MySessionService.getLoggedUser();
+      var Deaneries = DMSRestangular.all('deaneries');
 
       scope.getDeanery = function getDeanery(newDeanery) {
         console.log(newDeanery);
@@ -21,6 +22,13 @@ app.controller(
           //console.log(users);
           scope.rowCollection = deaneries;
           scope.displayedCollection = [].concat(scope.rowCollection);
+        });
+        var Dioceses = DMSRestangular.all('dioceses');
+        // This will query /accounts and return a promise.
+        Dioceses.customGET('').then(function(dioceses) {
+          //console.log(users);
+          scope.rowCollection_ = dioceses;
+          scope.displayedCollection_ = [].concat(scope.rowCollection_);
         });
       };
 
@@ -37,6 +45,18 @@ app.controller(
         });
       };
 
+      scope.newDeanery = function newDeanery() {
+        deanery = {
+              "deanery": {
+                  "name":           scope.deaneryProfile.name,
+                  "diocese_id":   scope.deaneryProfile.diocese_id
+         }
+        };
+        console.log(deanery);
+        Deaneries.customPOST(deanery);
+
+      };
+
       scope.delDeanery = function delDeanery(newDeanery){
         scope.deaneryProfile = newDeanery;
         deletedDeanery = DMSRestangular.one('deaneries', scope.deaneryProfile.id);
@@ -50,7 +70,8 @@ app.controller(
               "id":         scope.deaneryProfile.id,
               "name":       scope.deaneryProfile.name,
               "in_charge":  scope.deaneryProfile.in_charge,
-              "location":   scope.deaneryProfile.location
+              "location":   scope.deaneryProfile.location,
+              "diocese_id":   scope.deaneryProfile.diocese_id
          }
         };
         console.log(deanery);
@@ -60,7 +81,7 @@ app.controller(
       scope.setStatus = function setStatus(status) {
         scope.status = status;
         if (status == 'add') {
-          scope.parishProfile = [];
+          scope.deaneryProfile = [];
         }
       };
 

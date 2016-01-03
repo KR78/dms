@@ -4,45 +4,35 @@
     <form class="ui form ui segment" id="memberForm">
       <div class="fields">
         <div class="field eight wide required">
+          <label>ID</label>
+          <div class="ui icon left input">
+            <i class="icon building"></i>
+            <input name="fname" id="fname" type="text" ng-model="OrganisationProfile.id"/>
+          </div>
+
+        </div>
+      </div>
+      <div class="fields">
+        <div class="field eight wide required">
           <label>Name</label>
           <div class="ui icon left input">
             <i class="icon building"></i>
-            <input name="fname" id="fname" type="text" ng-model="parishProfile.name"/>
-          </div>
-
-        </div>
-        <div class="field eight wide required">
-          <label>Location</label>
-          <div class="ui icon left input">
-            <i class="icon map"></i>
-            <input name="lname" id="lname" type="text" ng-model="parishProfile.location"/>
-          </div>
-
-        </div>
-      </div>
-      <div class="fields">
-        <div class="field eight wide required">
-          <label>In Charge</label>
-          <div class="ui icon left input">
-            <i class="icon building"></i>
-            <input name="fname" id="fname" type="text" ng-model="parishProfile.in_charge"/>
+            <input name="fname" id="fname" type="text" ng-model="OrganisationProfile.name"/>
           </div>
         </div>
       </div>
       <div class="fields">
         <div class="field eight wide required">
-          <label>Deanery</label>
+          <label>Description</label>
           <div class="ui icon left input">
             <i class="icon building"></i>
-            <select name="fname" id="fname" ng-model="parishProfile.deanery_id" >
-            <option  ng-repeat="row in displayedCollection_" value="{{row.id}}">{{row.name}}</option>
-            </select>
+            <input name="fname" id="fname" type="text" ng-model="OrganisationProfile.description"/>
           </div>
         </div>
       </div>
       <div class="buttons">
-        <button class="ui button blue" ng-click="updateParish()" ng-show="status=='update'">Update Parish</button>
-        <button class="ui button teal" ng-click="newParish()" ng-show="status=='add'">Add Parish</button>
+        <button class="ui button blue" ng-click="updateOrganisation()" ng-show="status=='update'">Update Organisation</button>
+        <button class="ui button teal" ng-click="newOrganisation()" ng-show="status=='add'">Add Organisation</button>
       </div>
       <div class="ui error message"></div>
     </form>

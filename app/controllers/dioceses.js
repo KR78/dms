@@ -7,6 +7,7 @@ app.controller(
 
       getDioceseCount();
       rootScope.user = MySessionService.getLoggedUser();
+      var Dioceses = DMSRestangular.all('dioceses');
 
       scope.getDiocese = function getDiocese(newDiocese) {
         console.log(newDiocese);
@@ -15,12 +16,20 @@ app.controller(
       };
 
       scope.getDioceses = function getDioceses() {
-        var Dioceses = DMSRestangular.all('dioceses');
+        // var Dioceses = DMSRestangular.all('dioceses');
         // This will query /accounts and return a promise.
         Dioceses.customGET('').then(function(dioceses) {
           //console.log(users);
           scope.rowCollection = dioceses;
           scope.displayedCollection = [].concat(scope.rowCollection);
+        });
+
+        var Archdioceses = DMSRestangular.all('archdioceses');
+        // This will query /accounts and return a promise.
+        Archdioceses.customGET('').then(function(archdioceses) {
+          //console.log(users);
+          scope.rowCollection_ = archdioceses;
+          scope.displayedCollection_ = [].concat(scope.rowCollection_);
         });
       };
 
@@ -37,6 +46,18 @@ app.controller(
         });
       };
 
+      scope.newDiocese = function newDiocese() {
+        diocese = {
+              "diocese": {
+                  "name":           scope.dioceseProfile.name,
+                  "archdiocese_id":   scope.dioceseProfile.archdiocese_id
+         }
+        };
+        console.log(diocese);
+        Dioceses.customPOST(diocese);
+
+      };
+
       scope.delDiocese = function delDiocese(newDiocese){
         scope.dioceseProfile = newDiocese;
         deletedDiocese = DMSRestangular.one('dioceses', scope.dioceseProfile.id);
@@ -48,6 +69,7 @@ app.controller(
         diocese = {
               "diocese": {
               "id":         scope.dioceseProfile.id,
+              "archdiocese_id":   scope.dioceseProfile.archdiocese_id,
               "name":       scope.dioceseProfile.name,
               "in_charge":  scope.dioceseProfile.in_charge,
               "location":   scope.dioceseProfile.location
@@ -60,7 +82,7 @@ app.controller(
        scope.setStatus = function setStatus(status) {
         scope.status = status;
         if (status == 'add') {
-          scope.parishProfile = [];
+          scope.dioceseProfile = [];
         }
       };
 

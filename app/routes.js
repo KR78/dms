@@ -102,7 +102,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   state('location.archdioceses.list', {
     url: '/list',
     controller: function($rootScope, $scope) {
-      $rootScope.title = 'Archidiocese List';
+      $rootScope.title = 'Archdiocese List';
       $scope.getArchdioceses();
     },
     templateUrl: 'app/partials/location/archdioceses.list.html'
@@ -217,6 +217,37 @@ app.config(function($stateProvider, $urlRouterProvider) {
       $scope.setStatus('add');
     },
     templateUrl: 'app/partials/location/parishes.view.html'
+  }).
+  state('location.organisations', {
+    url: '/organisations',
+    controller: 'organisationsCtrl',
+    templateUrl: 'app/partials/location/organisations.index.html'
+  }).
+  state('location.organisations.list', {
+    url: '/list',
+    controller: function($rootScope, $scope) {
+      $rootScope.title = 'Organisation List';
+      $scope.getOrganisations();
+    },
+    templateUrl: 'app/partials/location/organisations.list.html'
+  }).
+  state('location.organisations.view', {
+    url: '/view',
+    controller: function($rootScope, $scope) {
+      $rootScope.title = 'Organisation View';
+      $scope.getOrganisations();
+      $scope.setStatus('update');
+    },
+    templateUrl: 'app/partials/location/organisations.view.html'
+  }).
+  state('location.organisations.add', {
+    url: '/add',
+    controller: function($rootScope, $scope) {
+      $rootScope.title = 'Organisation Add';
+      $scope.getOrganisations();
+      $scope.setStatus('add');
+    },
+    templateUrl: 'app/partials/location/organisations.view.html'
   }).
   state('location.members', {
     url: '/members',

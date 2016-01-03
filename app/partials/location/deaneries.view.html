@@ -4,26 +4,28 @@
     <form class="ui form ui segment" id="memberForm">
       <div class="fields">
         <div class="field eight wide required">
-          <label>ID</label>
+          <label>Name</label>
           <div class="ui icon left input">
             <i class="icon building"></i>
-            <input name="fname" id="fname" type="text" ng-model="DeaneryProfile.id"/>
+            <input name="fname" id="fname" type="text" ng-model="deaneryProfile.name"/>
           </div>
 
         </div>
       </div>
       <div class="fields">
         <div class="field eight wide required">
-          <label>Created At</label>
+          <label>Diocese</label>
           <div class="ui icon left input">
             <i class="icon building"></i>
-            <input name="fname" id="fname" type="text" ng-model="DeaneryProfile.created_at"/>
+            <select name="lname" id="fname" ng-model="deaneryProfile.diocese_id" >
+            <option  ng-repeat="row in displayedCollection_" value="{{row.id}}">{{row.name}}</option>
+            </select>
           </div>
         </div>
       </div>
       <div class="buttons">
-        <button class="ui button blue" ng-click="updateDeanery()" ng-show="status=='update'">Update Archdiocese</button>
-        <button class="ui button teal" ng-click="newDeanery()" ng-show="status=='add'">Add Archdiocese</button>
+        <button class="ui button blue" ng-click="updateDeanery()" ng-show="status=='update'">Update Deanery</button>
+        <button class="ui button teal" ng-click="newDeanery()" ng-show="status=='add'">Add Deanery</button>
       </div>
       <div class="ui error message"></div>
     </form>

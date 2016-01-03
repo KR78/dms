@@ -18,6 +18,15 @@ app.controller(
           scope.rowCollection = parishes;
           scope.displayedCollection = [].concat(scope.rowCollection);
         });
+
+        var Deaneries = DMSRestangular.all('deaneries');
+        // This will query /accounts and return a promise.
+        Deaneries.customGET('').then(function(deaneries) {
+          //console.log(users);
+          scope.rowCollection_ = deaneries;
+          scope.displayedCollection_ = [].concat(scope.rowCollection_);
+        });
+        
       };
 
       scope.login = function login() {
@@ -52,7 +61,8 @@ app.controller(
               "parish": {
                   "name":       scope.parishProfile.name,
                   "in_charge":  scope.parishProfile.in_charge,
-                  "location":   scope.parishProfile.location
+                  "location":   scope.parishProfile.location,
+                  "deanery_id":   scope.parishProfile.deanery_id
          }
         };
         console.log(parish);
@@ -81,13 +91,14 @@ app.controller(
               "id":         scope.parishProfile.id,
               "name":       scope.parishProfile.name,
               "in_charge":  scope.parishProfile.in_charge,
-              "location":   scope.parishProfile.location
+              "location":   scope.parishProfile.location,
+              "deanery_id":   scope.parishProfile.deanery_id
               }
         };
         updatedParish.customPUT(parish).then(function(response){
         toastr.info('Update Successful', 'Awesome!'); 
         }, function(response) {
-        toastr.danger('Update was not successfyl', 'Wow!'); 
+        toastr.danger('Update was not successful', 'Wow!'); 
         });
         console.log(scope.parishProfile.id);
       };
